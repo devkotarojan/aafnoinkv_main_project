@@ -1,15 +1,31 @@
 import { Prisma, OrderStatus, PaymentStatus } from "../../src/generated/prisma/client";
 
+export interface OrderSeedType {
+  userEmail: string;
+  orderStatus: OrderStatus;
+  totalAmount: Prisma.Decimal;
+  orderItems: OrderItemSeedType[];
+  shippingAddress: ShippingAddressSeedType;
+  payments: PaymentSeedType[];
+}
+
 export interface OrderItemSeedType {
-  sku: string; // Used to fetch variantId and product details
+  sku: string; 
   quantity: number;
   designUrl?: string;
-  // Snapshots (can be overridden, or dynamically pulled from the product in seed.ts)
-  title?: string;
-  description?: string;
-  price?: Prisma.Decimal;
-  size?: string;
-  color?: string;
+  title: string;
+  description: string;
+  price: Prisma.Decimal;
+  size: string;
+  color: string;
+}
+
+export interface PaymentSeedType {
+  provider: string;
+  providerTransactionId?: string;
+  amount: Prisma.Decimal;
+  method: string;
+  paymentStatus: PaymentStatus;
 }
 
 export interface ShippingAddressSeedType {
@@ -20,33 +36,21 @@ export interface ShippingAddressSeedType {
   description: string;
 }
 
-export interface PaymentSeedType {
-  provider: string;
-  providerTransactionId: string;
-  amount: Prisma.Decimal;
-  method: string;
-  paymentStatus: PaymentStatus;
-}
-
-export interface OrderSeedType {
-  userEmail: string; // 👈 Used to lookup userId via userMap
-  orderStatus: OrderStatus;
-  totalAmount: Prisma.Decimal;
-  items: OrderItemSeedType[];
-  shippingAddress: ShippingAddressSeedType;
-  payment: PaymentSeedType;
-}
-
 export const AllOrderData: OrderSeedType[] = [
   {
     userEmail: "amiacharger@gmail.com",
     orderStatus: OrderStatus.DELIVERED,
     totalAmount: new Prisma.Decimal(2500.00),
-    items: [
+    orderItems: [
       {
         sku: "TS-BLK-M-001",
         quantity: 2,
         designUrl: "https://picsum.photos/536/354",
+        title: "Stylish Tshirt for Men",
+        description: "a male wear tshirt for people who want to look stylish",
+        price: new Prisma.Decimal(100.00),
+        size: "L",
+        color: "White"
       },
     ],
     shippingAddress: {
@@ -56,23 +60,28 @@ export const AllOrderData: OrderSeedType[] = [
       landmark: "greencity",
       description: "behind greencity",
     },
-    payment: {
+    payments: [{
       provider: "Khalti",
       providerTransactionId: "KHALTI-TXN-987654321",
       amount: new Prisma.Decimal(2500.00),
       method: "Digital Wallet",
       paymentStatus: PaymentStatus.COMPLETED,
-    },
+    }]
   },
   {
     userEmail: "angesh@gmail.com",
     orderStatus: OrderStatus.PROCESSING,
     totalAmount: new Prisma.Decimal(2800.00),
-    items: [
+    orderItems: [
       {
         sku: "HD-GRY-M-001",
         quantity: 1,
         designUrl: "https://picsum.photos/id/237/536/354",
+        title: "Stylish Hoodie for Men",
+        description: "a male wear Hoodie for people who want to look stylish",
+        price: new Prisma.Decimal(100.00),
+        size: "L",
+        color: "Red"
       },
     ],
     shippingAddress: {
@@ -82,12 +91,12 @@ export const AllOrderData: OrderSeedType[] = [
       landmark: "greencity",
       description: "near greencity",
     },
-    payment: {
+    payments: [{
       provider: "Esewa",
       providerTransactionId: "ESEWA-TXN-123456789",
       amount: new Prisma.Decimal(2800.00),
       method: "Digital Wallet",
       paymentStatus: PaymentStatus.COMPLETED,
-    },
+    }],
   },
 ];

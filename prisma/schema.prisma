@@ -153,7 +153,7 @@ model OrderItem {
   title       String
   description String  @db.Text
   price       Decimal @db.Decimal(10, 2) // Price snapshot at time of checkout
-  size        String // eg S, M, L, XL
+  size        String  @default("M") // eg S, M, L, XL
   sku         String //Stock Keeping Unit
   color       String
 
@@ -174,7 +174,7 @@ model ShippingAddress {
   fullName    String @map("full_name")
   phone       String
   city        String
-  landmark    String
+  landmark    String 
   description String @db.Text
 
   createdAt DateTime @default(now()) @map("created_at")

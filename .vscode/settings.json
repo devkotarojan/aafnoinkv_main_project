@@ -1,0 +1,22 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.jj": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    ".agents": true,
+    ".claude": true,
+    ".next": true,
+    ".vscode": true,
+    ".windsurf": true,
+    "node_modules": true,
+    "AGENTS.md": true,
+    "eslint.config.mjs": true,
+    "next-env.d.ts": true,
+    "pnpm-lock.yaml": true,
+    "pnpm-workspace.yaml": true,
+    "skills-lock.json": true
+  }
+}
