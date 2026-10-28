@@ -1,6 +1,6 @@
 import { Prisma } from "../../src/generated/prisma/client"
 
-export const userData: Prisma.UserCreateInput[] = [
+export const AllUserData: Prisma.UserCreateInput[] = [
   {
     email: "amiacharger@gmail.com",
     fullName: "Rojan Devkota",
