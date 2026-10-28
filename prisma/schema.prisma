@@ -12,18 +12,212 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+//---------------------ENUMS------------------------------
+enum Role {
+  USER
+  ADMIN
 }
 
-model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+//---------------------USER---------------------------------------------
+model User {
+  id             String  @id @default(cuid())
+  email          String  @unique
+  fullName       String? @map("full_name")
+  hashedPassword String? @map("hashed_password")
+  role           Role    @default(USER)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  cart    Cart?
+  address Address?
+  orders  Order[]
+
+  @@map("users")
+}
+
+//---------------------PRODUCT AND VARIANTS------------------------------
+model Product {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  description String?  @db.Text
+  basePrice   Decimal  @map("base_price") @db.Decimal(10, 2) // Avoiding the floating point error
+  images      String[] // Array of image URLS
+  isPublished Boolean  @default(false) @map("is_published")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  variants ProductVariant[]
+
+  @@map("products")
+}
+
+model ProductVariant {
+  id        String @id @default(uuid())
+  productId String @map("product_id") //FK
+  size      String @default("M") // eg S, M, L, XL
+  color     String @default("BLACK")
+  sku       String @unique //Stock Keeping Unit
+  stock     Int    @default(0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  cartItems  CartItem[]
+  orderItems OrderItem[]
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, size, color])
+  @@map("product_variants")
+}
+
+//---------------------CART AND CART ITEMS---------------------------------
+model Cart {
+  id     String @id @default(uuid())
+  userId String @unique @map("user_id") //FK
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  cartItems CartItem[]
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("carts")
+}
+
+model CartItem {
+  id        String  @id @default(uuid())
+  cartId    String  @map("cart_id")
+  variantId String  @map("variant_id")
+  quantity  Int     @default(1)
+  designUrl String? @map("design_url") // stores the design image url
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  //Relations
+  cart           Cart           @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  productVariant ProductVariant @relation(fields: [variantId], references: [id], onDelete: Cascade)
+
+  @@map("cart_items")
+}
+
+//---------------------ORDER AND ORDER ITEM------------------------------
+model Order {
+  id          String      @id @default(uuid())
+  userId      String      @map("user_id")
+  orderStatus OrderStatus @default(PENDING)
+  totalAmount Decimal     @map("total_amount") @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  //Relations
+  orderItems      OrderItem[]
+  payments        Payment[]
+  user            User             @relation(fields: [userId], references: [id])
+  shippingAddress ShippingAddress?
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String  @id @default(uuid())
+  orderId     String  @map("order_id")
+  variantId   String  @map("variant_id")
+  quantity    Int     @default(1)
+  designUrl   String? @map("custom_design_url") // Artwork snapshot
+  title       String
+  description String  @db.Text
+  price       Decimal @db.Decimal(10, 2) // Price snapshot at time of checkout
+  size        String // eg S, M, L, XL
+  sku         String //Stock Keeping Unit
+  color       String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  //Relations
+  order   Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  variant ProductVariant @relation(fields: [variantId], references: [id])
+
+  @@map("order_items")
+}
+
+//Snapshot of the Address when an order is placed
+model ShippingAddress {
+  id          String @id @default(uuid())
+  orderId     String @unique @map("order_id")
+  fullName    String @map("full_name")
+  phone       String
+  city        String
+  landmark    String
+  description String @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  //Relation
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("shipping_address")
+}
+
+//------------------------PAYMENT AND ADDRESS------------------------------
+model Payment {
+  id                    String        @id @default(uuid())
+  orderId               String        @map("order_id")
+  provider              String
+  providerTransactionId String?       @unique @map("provider_transaction_id")
+  amount                Decimal       @db.Decimal(10, 2)
+  method                String
+  paymentStatus         PaymentStatus @default(PENDING) @map("payment_status")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  //Relations
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@map("payments")
+}
+
+model Address {
+  id          String @id @default(uuid())
+  userId      String @unique @map("user_id")
+  fullName    String @map("full_name")
+  phone       String
+  city        String
+  landmark    String
+  description String @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  //Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("addresses")
 }
