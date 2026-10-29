@@ -1,3 +1,4 @@
+import { Prisma } from "../src/generated/prisma/client";
 import { prisma } from "../src/lib/prisma"
 import { AllOrderData } from "./data/order";
 import { AllProductData } from "./data/products";
@@ -6,6 +7,15 @@ import { AllCartData } from "./data/cart";
 import "dotenv/config";
 
 async function seedData() { 
+  interface variantMetaDataType {
+      variantId: string;
+      title: string;
+      description: string;
+      price: Prisma.Decimal;
+      size: string;
+      color: string;
+      sku: string;
+  }
   await prisma.payment.deleteMany();
   await prisma.shippingAddress.deleteMany(); 
   await prisma.orderItem.deleteMany();
@@ -26,5 +36,28 @@ async function seedData() {
   
   console.log(`seeded ${userMap.size} users`);
   
-  
+  const variantMap = new Map<string, variantMetaDataType>();
+  for (const product of AllProductData) {
+    const { variants, ...productData } = product; 
+    const createdProduct = await prisma.product.create({
+      data: {
+        ...productData,
+        variants: {
+          create: variants
+        }
+      },
+      include: { variants: true }
+    });
+    for (const v of createdProduct.variants) {
+    variantMap.set(v.sku, {
+      variantId: v.id,
+      title: createdProduct.title,
+      description: createdProduct.description ?? "",
+      price: createdProduct.basePrice,
+      size: v.size,
+      color: v.color,
+      sku: v.sku,
+    });
+  }
+  }
 }
