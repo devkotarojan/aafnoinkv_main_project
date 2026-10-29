@@ -54,7 +54,7 @@ async function seedData() {
         description: createdProduct.description,
         price: createdProduct.basePrice,
         size: v.size,
-        color: v.color
+        color: v.color,
       });
     }
   }
@@ -81,4 +81,47 @@ async function seedData() {
     });
   }
   
+  for (const orderInfo of AllOrderData) {
+    const userId = userMap.get(orderInfo.userEmail);
+    if (!userId) continue;
+
+    const orderItemsCreate = [];
+    for (const item of orderInfo.orderItems) {
+      const variantInfo = variantMap.get(item.sku);
+      if (!variantInfo) {
+        continue;
+      }
+
+      orderItemsCreate.push({
+        variantId: variantInfo.variantId,
+        quantity: item.quantity,
+        designUrl: item.designUrl,
+        title: item.title,
+        description: item.description,
+        price: item.price,
+        size: item.size,
+        color: item.color,
+        sku: item.sku,
+      });
+    }
+
+    if (orderItemsCreate.length === 0) continue;
+
+    await prisma.order.create({
+      data: {
+        userId,
+        orderStatus: orderInfo.orderStatus,
+        totalAmount: orderInfo.totalAmount,
+        orderItems: {
+          create: orderItemsCreate,
+        },
+        shippingAddress: {
+          create: orderInfo.shippingAddress,
+        },
+        payments: {
+          create: orderInfo.payments,
+        },
+      },
+    });
+  }
 }
