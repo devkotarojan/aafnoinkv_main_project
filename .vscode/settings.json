@@ -8,7 +8,6 @@
     "**/Thumbs.db": true,
     ".agents": true,
     ".claude": true,
-    ".next": true,
     ".vscode": true,
     ".windsurf": true,
     "node_modules": true,
@@ -17,6 +16,10 @@
     "next-env.d.ts": true,
     "pnpm-lock.yaml": true,
     "pnpm-workspace.yaml": true,
-    "skills-lock.json": true
+    "skills-lock.json": true,
+    ".env": true,
+    ".gitignore": true,
+    "README.md": true,
+    ".next": true
   }
 }
