@@ -10,11 +10,10 @@ async function seedData() {
   interface variantMetaDataType {
       variantId: string;
       title: string;
-      description: string;
+      description: string | null;
       price: Prisma.Decimal;
       size: string;
       color: string;
-      sku: string;
   }
   await prisma.payment.deleteMany();
   await prisma.shippingAddress.deleteMany(); 
@@ -49,15 +48,37 @@ async function seedData() {
       include: { variants: true }
     });
     for (const v of createdProduct.variants) {
-    variantMap.set(v.sku, {
-      variantId: v.id,
-      title: createdProduct.title,
-      description: createdProduct.description ?? "",
-      price: createdProduct.basePrice,
-      size: v.size,
-      color: v.color,
-      sku: v.sku,
+      variantMap.set(v.sku, {
+        variantId: v.id,
+        title: createdProduct.title,
+        description: createdProduct.description,
+        price: createdProduct.basePrice,
+        size: v.size,
+        color: v.color
+      });
+    }
+  }
+  
+  for (const cart of AllCartData) {
+    const userId = userMap.get(cart.userEmail);
+    if (!userId) continue;
+    
+    const validCartItems = cart.cartItems.map((item, index) => {
+      const targetVarient = Array.from(variantMap.values())[index % variantMap.size];
+      
+      return {
+        variantId: targetVarient.variantId,
+        quantity: item.quantity,
+        designUrl: item.designUrl,
+      };
+    });
+    
+    await prisma.cart.create({
+      data: {
+        userId: userId,
+        cartItems: { create: validCartItems }
+      },
     });
   }
-  }
+  
 }
