@@ -1,44 +1,46 @@
+import "dotenv/config";
 import { Prisma } from "../src/generated/prisma/client";
 import { prisma } from "../src/lib/prisma"
 import { AllOrderData } from "./data/order";
 import { AllProductData } from "./data/products";
 import { AllUserData } from "./data/user";
 import { AllCartData } from "./data/cart";
-import "dotenv/config";
 
-async function seedData() { 
-  interface variantMetaDataType {
-      variantId: string;
-      title: string;
-      description: string | null;
-      price: Prisma.Decimal;
-      size: string;
-      color: string;
-  }
-  await prisma.payment.deleteMany();
-  await prisma.shippingAddress.deleteMany(); 
-  await prisma.orderItem.deleteMany();
-  await prisma.order.deleteMany();
-  await prisma.cartItem.deleteMany();
-  await prisma.address.deleteMany();
-  await prisma.cart.deleteMany();
-  await prisma.productVariant.deleteMany();
-  await prisma.product.deleteMany();
+interface variantMetaData {
+    variantId: string;
+    title: string;
+    description: string | null;
+    price: Prisma.Decimal;
+    size: string;
+    color: string;
+}
+
+async function seedData(tx: Prisma.TransactionClient) { 
+  await tx.payment.deleteMany();
+  await tx.shippingAddress.deleteMany(); 
+  await tx.orderItem.deleteMany();
+  await tx.order.deleteMany();
+  await tx.cartItem.deleteMany();
+  await tx.address.deleteMany();
+  await tx.cart.deleteMany();
+  await tx.productVariant.deleteMany();
+  await tx.product.deleteMany();
+  await tx.user.deleteMany();
   
   console.log("Database wiped successfully!");
   
   const userMap = new Map<string, string>();
-  for (const user of AllUserData) {
-    const createdUser = await prisma.user.create({data: user});
+  for (const userInfo of AllUserData) {
+    const createdUser = await tx.user.create({data: userInfo});
     userMap.set(createdUser.email, createdUser.id);
   }
   
   console.log(`seeded ${userMap.size} users`);
   
-  const variantMap = new Map<string, variantMetaDataType>();
+  const variantMap = new Map<string, variantMetaData>();
   for (const product of AllProductData) {
     const { variants, ...productData } = product; 
-    const createdProduct = await prisma.product.create({
+    const createdProduct = await tx.product.create({
       data: {
         ...productData,
         variants: {
@@ -59,11 +61,13 @@ async function seedData() {
     }
   }
   
-  for (const cart of AllCartData) {
-    const userId = userMap.get(cart.userEmail);
-    if (!userId) continue;
+  for (const cartInfo of AllCartData) {
+    const userId = userMap.get(cartInfo.userEmail);
+    if (!userId) {
+      throw new Error(`User not found for the email ${cartInfo.userEmail}`);
+    }
     
-    const validCartItems = cart.cartItems.map((item, index) => {
+    const validCartItems = cartInfo.cartItems.map((item, index) => {
       const targetVarient = Array.from(variantMap.values())[index % variantMap.size];
       
       return {
@@ -73,7 +77,7 @@ async function seedData() {
       };
     });
     
-    await prisma.cart.create({
+    await tx.cart.create({
       data: {
         userId: userId,
         cartItems: { create: validCartItems }
@@ -83,13 +87,15 @@ async function seedData() {
   
   for (const orderInfo of AllOrderData) {
     const userId = userMap.get(orderInfo.userEmail);
-    if (!userId) continue;
+    if (!userId) {
+      throw new Error(`User not found for the email ${orderInfo.userEmail}`);
+    }
 
-    const orderItemsCreate = [];
+    const orderItemsCreate:Prisma.OrderItemUncheckedCreateWithoutOrderInput[] = [];
     for (const item of orderInfo.orderItems) {
       const variantInfo = variantMap.get(item.sku);
       if (!variantInfo) {
-        continue;
+        throw new Error(`Variant was not found for the sku ${item.sku}`);
       }
 
       orderItemsCreate.push({
@@ -104,10 +110,14 @@ async function seedData() {
         sku: item.sku,
       });
     }
+    
+    if (orderItemsCreate.length === 0) {
+      throw new Error(
+        `Order for ${orderInfo.userEmail} has no items`
+      );
+    }
 
-    if (orderItemsCreate.length === 0) continue;
-
-    await prisma.order.create({
+    await tx.order.create({
       data: {
         userId,
         orderStatus: orderInfo.orderStatus,
@@ -125,3 +135,26 @@ async function seedData() {
     });
   }
 }
+
+export async function main() {
+  try {
+    await prisma.$transaction(
+      async (tx) => {
+        await seedData(tx);
+      },
+      {
+        maxWait: 10_000,
+        timeout: 60_000,
+      }
+    )
+    
+    console.log("Database seeded successfully!");
+  } catch (error) {
+    console.log("There was an error seeding the data:", error);
+    process.exitCode = 1;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+main();
