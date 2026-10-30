@@ -22,7 +22,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   return (
-    <header className="border-b px-4 md:px-6">
+    <header className="sticky top-0 z-50 border-b px-4 md:px-6 bg-white">
       <div className="flex h-16 justify-between gap-4">
         {/* Left side */}
         <div className="flex gap-2">
@@ -105,11 +105,11 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild className="text-sm" size="sm" variant="ghost">
+          <Button asChild className="text-sm" size="sm" variant="outline">
             <a href="#">Sign In</a>
           </Button>
-          <Button asChild className="text-sm" size="sm">
-            <a href="#">Get Started</a>
+          <Button asChild className="text-sm font-light" variant="secondary" size="sm">
+            <a href="#">Sign Up</a>
           </Button>
         </div>
       </div>
