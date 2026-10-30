@@ -1,4 +1,6 @@
 "use client"
+//for reload
+export const dynamic = "force-dynamic";
 
 import { LoginForm } from "@/components/login-form"
 import { GalleryVerticalEndIcon } from "lucide-react"
