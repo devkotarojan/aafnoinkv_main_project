@@ -25,25 +25,31 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl font-medium">Welcome back</CardTitle>
+          <CardTitle className="text-xl font-semibold">Welcome back</CardTitle>
           <CardDescription>
-            Login with your Apple or Google account
+            Login with your Google account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form>
             <FieldGroup>
-              <Field>
                 <Button variant="outline" type="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                     <path
-                      d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                      fill="currentColor"
-                    />
+                      d="M23.45 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.57-5.17 3.57-8.82z"
+                      fill="#4285F4" />
+                    <path
+                      d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.12 0-5.77-2.1-6.72-4.93H1.2v3.15C3.17 21.36 7.23 24 12 24z"
+                      fill="#34A853" />
+                    <path
+                      d="M5.28 14.32c-.25-.72-.38-1.5-.38-2.32s.13-1.6.38-2.32V6.53H1.2C.43 8.08 0 9.99 0 12s.43 3.92 1.2 5.47l4.08-3.15z"
+                      fill="#FBBC05" />
+                    <path
+                      d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.23 0 3.17 2.64 1.2 6.53l4.08 3.15c.95-2.83 3.6-4.93 6.72-4.93z"
+                      fill="#EA4335" />
                   </svg>
                   Login with Google
                 </Button>
-              </Field>
               <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">
                 Or continue with
               </FieldSeparator>
