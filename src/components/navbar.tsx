@@ -22,7 +22,7 @@ const navigationLinks = [
 
 export default function Navbar() {
   return (
-    <header className="sticky top-0 z-50 border-b px-4 md:px-6 bg-white">
+    <header className="sticky top-0 z-50 border-b px-4 md:px-6 bg-background">
       <div className="flex h-16 justify-between gap-4">
         {/* Left side */}
         <div className="flex gap-2">
@@ -92,7 +92,7 @@ export default function Navbar() {
                   <NavigationMenuItem className="h-full" key={String(index)}>
                     <NavigationMenuLink
                       data-active={link.active ? "" : undefined}
-                      className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-muted-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary data-[active]:bg-transparent!"
+                      className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary data-[active]:bg-transparent!"
                       href={link.href}
                     >
                       {link.label}

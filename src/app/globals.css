@@ -81,9 +81,9 @@
   --sidebar-accent-foreground: #0d0d0d;
   --sidebar-border: #e4e4e7;
   --sidebar-ring: #ff8e3c;
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: inter, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: ui-serif, georgia, cambria, "times new roman", times, serif;
+  --font-mono: ui-monospace, sfmono-regular, menlo, monaco, consolas, "liberation mono", "courier new", monospace;
   --radius: 0.4rem;
   --shadow-x: 0;
   --shadow-y: 1px;
@@ -135,9 +135,9 @@
   --sidebar-accent-foreground: #fffffe;
   --sidebar-border: #2a2a2a;
   --sidebar-ring: #ff8e3c;
-  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-sans: inter, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: ui-serif, georgia, cambria, "times new roman", times, serif;
+  --font-mono: ui-monospace, sfmono-regular, menlo, monaco, consolas, "liberation mono", "courier new", monospace;
   --radius: 0.4rem;
   --shadow-x: 0;
   --shadow-y: 1px;
