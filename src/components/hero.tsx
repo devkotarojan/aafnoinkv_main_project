@@ -156,19 +156,19 @@ export function Hero() {
 
           {/* Hero visual composition */}
           <div className="relative mx-auto h-[480px] w-full max-w-[650px] sm:h-[540px] lg:h-[580px] lg:-translate-y-4">
+            
+            {/*Blobs */}
             <div className="absolute inset-x-0 top-[6%] h-[84%] rotate-[-18deg] rounded-[42%_58%_35%_65%/_40%_55%_45%_60%] bg-[#F1ECE3] dark:bg-primary/5" />
 
-            <div className="absolute right-[13%] top-[4%] size-20 animate-float-slow rounded-full border border-primary/30" />
-
-            <div className="absolute bottom-[10%] left-[7%] size-12 animate-pulse-soft rounded-full bg-primary/10" />
+            <div className="absolute bottom-[10%] left-[8%] size-12 animate-pulse-soft rounded-full bg-primary/10"/>
 
             <div className="absolute left-[7%] top-[0%] z-20 -rotate-12">
-              <p className="font-serif text-sm leading-tight italic sm:text-base">
+              <p className="font-sans text-sm leading-tight italic sm:text-base">
                 Made from
                 <br />
                 your imagination.
               </p>
-
+  
               <svg
                 viewBox="0 0 75 55"
                 fill="none"
