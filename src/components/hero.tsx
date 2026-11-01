@@ -93,9 +93,7 @@ export function Hero() {
         {/* Soft background atmosphere */}
         <div className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[550px] w-[550px] rounded-full bg-primary/[0.045] blur-3xl" />
 
-        <div className="pointer-events-none absolute left-[5%] top-[24%] -z-10 size-3 animate-pulse-soft rounded-full bg-primary/30" />
 
-        <div className="pointer-events-none absolute left-[9%] top-[37%] -z-10 size-2 animate-float rounded-full bg-primary/20" />
 
         <div className="mx-auto grid min-h-[620px] max-w-[1440px] items-center gap-5 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
           {/* Hero content */}
@@ -119,12 +117,11 @@ export function Hero() {
                 className="group inline-flex h-14 items-center gap-3 rounded-xl bg-primary px-7 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 Start Designing
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <Link
                 href="/shop"
-                className="inline-flex h-14 items-center rounded-xl border border-border bg-card px-6 text-sm font-semibold transition-all duration-300 hover:border-primary/40 hover:bg-primary/[0.02]"
+                className="inline-flex h-14 items-center rounded-xl border border-border bg-card px-6 text-sm font-semibold transition-all duration-300 hover:bg-primary/[0.02]"
               >
                 Explore Products
               </Link>
@@ -184,7 +181,7 @@ export function Hero() {
             </div>
 
             {/* Main product */}
-            <div className="absolute left-[12%] top-[12%] z-10 h-[74%] w-[72%] overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[-3deg] dark:bg-carda">
+            <div className="absolute left-[12%] top-[12%] z-10 h-[74%] w-[72%] overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[1deg] dark:bg-carda -rotate-3">
               <img
                 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&q=90"
                 alt="Custom T-shirt"
