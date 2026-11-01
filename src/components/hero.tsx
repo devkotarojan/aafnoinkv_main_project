@@ -95,7 +95,7 @@ export function Hero() {
 
 
 
-        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-5 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16 mt-0">
+        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-5 px-6 py-10 sm:px-10 sm:py-11 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16 mt-0">
           {/* Hero content */}
           <div className="relative z-20 flex flex-col items-start lg:-translate-y-3">
             <h1 className="max-w-[680px] text-[clamp(3rem,6vw,4.7rem)] font-extrabold leading-[0.95] tracking-[-0.07em]">
