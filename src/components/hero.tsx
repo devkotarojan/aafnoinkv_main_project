@@ -95,7 +95,7 @@ export function Hero() {
 
 
 
-        <div className="mx-auto grid min-h-[620px] max-w-[1440px] items-center gap-5 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
+        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-5 px-6 py-10 sm:px-10 sm:py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16 mt-0">
           {/* Hero content */}
           <div className="relative z-20 flex flex-col items-start lg:-translate-y-3">
             <h1 className="max-w-[680px] text-[clamp(3rem,6vw,4.7rem)] font-extrabold leading-[0.95] tracking-[-0.07em]">
@@ -130,13 +130,13 @@ export function Hero() {
             <div className="mt-9 flex items-center gap-3">
               <div className="flex -space-x-2">
                 <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E9D7C5] text-xs font-bold text-[#654B37]">
-                  A
+                  I
                 </div>
                 <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#D7E0D1] text-xs font-bold text-[#40513C]">
-                  D
+                  N
                 </div>
                 <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E8D5D8] text-xs font-bold text-[#724B55]">
-                  M
+                  K
                 </div>
               </div>
 
@@ -145,7 +145,7 @@ export function Hero() {
                   Made for your kind of creativity
                 </p>
                 <p className="mt-0.5 text-xs text-muted-foreground">
-                  Your style. Your statement.
+                  Your Design. Your Wear.
                 </p>
               </div>
             </div>
@@ -228,8 +228,8 @@ export function Hero() {
       {/* ============================================================
           BENEFITS
       ============================================================ */}
-      <section className="border-y border-border bg-card/50">
-        <div className="mx-auto grid max-w-[1440px] grid-cols-1 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:px-16">
+      <section className="border-y border-border bg-background">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:px-16">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
 
@@ -266,7 +266,7 @@ export function Hero() {
           YOURS
         </div>
 
-        <div className="relative mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             {/* Visual */}
             <div className="relative mx-auto h-[440px] w-full max-w-[520px] sm:h-[500px]">
@@ -306,14 +306,14 @@ export function Hero() {
                 WHY AAFNOINK?
               </div>
 
-              <h2 className="mt-6 max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
+              <h2 className="mt-7 max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                 Because the best things
                 <span className="text-primary">
                   {" "}don&apos;t look like everyone else&apos;s.
                 </span>
               </h2>
 
-              <p className="mt-7 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
                 AafnoInk is built for ideas that deserve more than a folder on
                 your computer. Your art, your joke, your brand, your memory —
                 put it on something and make it part of your everyday life.
@@ -349,7 +349,7 @@ export function Hero() {
         <div className="pointer-events-none absolute left-[7%] top-20 size-3 animate-pulse-soft rounded-full bg-primary/30" />
         <div className="pointer-events-none absolute right-[10%] top-24 size-16 animate-float-slow rotate-12 rounded-2xl border border-primary/20" />
 
-        <div className="relative mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-2xl">
               <p className="text-xs font-bold tracking-[0.2em] text-primary">
@@ -424,7 +424,7 @@ export function Hero() {
           <Sparkles className="size-7" />
         </div>
 
-        <div className="relative mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-primary">
@@ -432,7 +432,7 @@ export function Hero() {
                 PICK YOUR CANVAS
               </div>
 
-              <h2 className="mt-5 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
+              <h2 className="mt-5 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                 Start with something
                 <br />
                 <span className="text-primary">worth making yours.</span>
@@ -495,7 +495,7 @@ export function Hero() {
               className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-6 text-primary-foreground shadow-lg shadow-primary/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
             >
               <div className="absolute -right-8 -top-8 size-32 animate-pulse-soft rounded-full border-[18px] border-white/10" />
-              <div className="absolute bottom-8 right-8 text-6xl font-black text-white/10">
+              <div className="absolute bottom-8 right-8 text-7xl font-black text-white/10">
                 +
               </div>
 
@@ -525,7 +525,7 @@ export function Hero() {
           CREATIVE SHOWCASE
       ============================================================ */}
       <section className="relative overflow-hidden py-24 lg:py-32">
-        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
             <div>
               <p className="text-xs font-bold tracking-[0.2em] text-primary">
@@ -595,7 +595,7 @@ export function Hero() {
           FINAL CTA
       ============================================================ */}
       <section className="relative px-6 pb-24 sm:px-10 lg:px-16 lg:pb-32">
-        <div className="mx-auto max-w-[1440px]">
+        <div className="mx-auto max-w-7xl">
           <div className="relative overflow-hidden rounded-[2rem] bg-primary px-7 py-16 text-primary-foreground shadow-xl shadow-primary/10 sm:px-12 lg:px-20 lg:py-20">
             <div className="absolute -left-20 -top-20 size-64 animate-float-slow rounded-full border-[30px] border-white/10" />
             <div className="absolute -bottom-28 -right-16 size-80 animate-pulse-soft rounded-full border-[45px] border-white/10" />
@@ -609,7 +609,7 @@ export function Hero() {
                   <Sparkles className="size-6" />
                 </div>
 
-                <h2 className="mt-7 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
+                <h2 className="mt-7 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                   That idea in your head?
                   <br />
                   Let&apos;s put it on something.
