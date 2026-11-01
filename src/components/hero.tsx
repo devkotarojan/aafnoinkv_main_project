@@ -12,7 +12,6 @@ import {
   Sparkles,
   Truck,
   Upload,
-  WandSparkles,
 } from "lucide-react";
 
 const benefits = [
@@ -236,7 +235,7 @@ export function Hero() {
             return (
               <div
                 key={benefit.title}
-                className={`flex items-center gap-4 py-7 transition-colors hover:bg-primary/[0.025] sm:px-5 ${
+                className={`flex items-center gap-4 py-7 transition-colors sm:px-5 ${
                   index !== 0
                     ? "border-t border-border sm:border-l sm:border-t-0"
                     : ""
@@ -280,7 +279,7 @@ export function Hero() {
                 />
               </div>
 
-              <div className="absolute right-[2%] top-[12%] flex size-28 animate-float-delayed rotate-12 flex-col items-center justify-center rounded-full bg-primary text-center text-primary-foreground shadow-xl">
+              <div className="absolute right-[2%] top-[12%] flex size-22 animate-float-delayed rotate-12 flex-col items-center justify-center rounded-full bg-primary text-center text-primary-foreground shadow-xl">
                 <Sparkles className="size-6" />
                 <span className="mt-1 text-[10px] font-black leading-tight">
                   MADE
@@ -292,31 +291,24 @@ export function Hero() {
               <div className="absolute bottom-[4%] right-[5%] max-w-[210px] -rotate-3 rounded-2xl border border-border bg-background p-5 shadow-xl transition-transform duration-300 hover:-translate-y-1">
                 <p className="text-xs font-bold text-primary">NO BORING MERCH.</p>
                 <p className="mt-2 text-sm font-semibold leading-6">
-                  Your clothes can say something about you.
+                  Express yourself with what you wear
                 </p>
               </div>
 
-              <div className="absolute bottom-[20%] left-[-2%] size-10 animate-pulse-soft rounded-full border-2 border-primary/30" />
             </div>
 
             {/* Text */}
             <div className="lg:pl-10">
-              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-primary">
-                <WandSparkles className="size-4" />
-                WHY AAFNOINK?
-              </div>
 
               <h2 className="mt-7 max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
-                Because the best things
+                The best things
                 <span className="text-primary">
                   {" "}don&apos;t look like everyone else&apos;s.
                 </span>
               </h2>
 
               <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-                AafnoInk is built for ideas that deserve more than a folder on
-                your computer. Your art, your joke, your brand, your memory —
-                put it on something and make it part of your everyday life.
+                AafnoInk is built to turn your ideas into reality. Make your memory a part of your everyday life.
               </p>
 
               <div className="mt-9 grid gap-4 sm:grid-cols-2">
@@ -328,7 +320,7 @@ export function Hero() {
                 ].map((item) => (
                   <div
                     key={item}
-                    className="group flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-sm"
+                    className="group flex items-center gap-3 rounded-xl border border-border bg-card/60 px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-sm"
                   >
                     <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-transform duration-300 group-hover:scale-110">
                       <Check className="size-3.5 text-primary" />
@@ -346,15 +338,10 @@ export function Hero() {
           HOW IT WORKS
       ============================================================ */}
       <section className="relative overflow-hidden border-y border-border bg-[#F5F2EC] py-24 dark:bg-card/30 lg:py-32">
-        <div className="pointer-events-none absolute left-[7%] top-20 size-3 animate-pulse-soft rounded-full bg-primary/30" />
-        <div className="pointer-events-none absolute right-[10%] top-24 size-16 animate-float-slow rotate-12 rounded-2xl border border-primary/20" />
 
         <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold tracking-[0.2em] text-primary">
-                FROM IDEA TO INK
-              </p>
 
               <h2 className="mt-5 text-4xl font-extrabold tracking-[-0.055em] sm:text-5xl">
                 Three steps.
@@ -380,16 +367,13 @@ export function Hero() {
                     index === 1 ? "md:translate-y-8" : ""
                   }`}
                 >
-                  <span className="absolute -right-2 -top-9 text-[8rem] font-black leading-none tracking-tighter text-primary/[0.055]">
-                    {step.number}
-                  </span>
 
                   <div className="relative flex items-center justify-between">
                     <div className="flex size-13 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-6">
                       <Icon className="size-6" />
                     </div>
 
-                    <span className="text-xs font-black tracking-[0.15em] text-primary">
+                    <span className="text-xl font-black tracking-[0.15em] text-primary">
                       {step.number}
                     </span>
                   </div>
@@ -417,20 +401,12 @@ export function Hero() {
       <section className="relative overflow-hidden bg-[#F8F6F1] py-24 dark:bg-background lg:py-32">
         {/* Decorative background */}
         <div className="pointer-events-none absolute -left-24 top-10 size-80 animate-float-slow rounded-full border border-primary/10" />
-        <div className="pointer-events-none absolute right-[7%] top-5 text-[13rem] font-black leading-none tracking-tighter text-primary/[0.035]">
-          INK
-        </div>
         <div className="pointer-events-none absolute left-[7%] top-[48%] text-primary/50 animate-float">
-          <Sparkles className="size-7" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-primary">
-                <Palette className="size-4" />
-                PICK YOUR CANVAS
-              </div>
 
               <h2 className="mt-5 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                 Start with something
@@ -489,104 +465,6 @@ export function Hero() {
               </Link>
             ))}
 
-            {/* Design from scratch card */}
-            <Link
-              href="/design"
-              className="group relative flex min-h-[300px] flex-col justify-between overflow-hidden rounded-2xl bg-primary p-6 text-primary-foreground shadow-lg shadow-primary/10 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
-            >
-              <div className="absolute -right-8 -top-8 size-32 animate-pulse-soft rounded-full border-[18px] border-white/10" />
-              <div className="absolute bottom-8 right-8 text-7xl font-black text-white/10">
-                +
-              </div>
-
-              <Sparkles className="relative size-7 transition-transform duration-500 group-hover:rotate-12" />
-
-              <div className="relative">
-                <p className="text-[10px] font-bold tracking-[0.18em] text-primary-foreground/70">
-                  GOT AN IDEA?
-                </p>
-                <h3 className="mt-2 text-2xl font-extrabold leading-tight">
-                  Start from
-                  <br />
-                  scratch.
-                </h3>
-
-                <div className="mt-5 flex items-center gap-2 text-sm font-bold">
-                  Design now
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ============================================================
-          CREATIVE SHOWCASE
-      ============================================================ */}
-      <section className="relative overflow-hidden py-24 lg:py-32">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-center">
-            <div>
-              <p className="text-xs font-bold tracking-[0.2em] text-primary">
-                MAKE IT UNMISTAKABLY YOURS
-              </p>
-
-              <h2 className="mt-5 text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl">
-                A logo.
-                <br />
-                A drawing.
-                <br />
-                <span className="text-primary">A completely random idea.</span>
-              </h2>
-
-              <p className="mt-7 max-w-lg text-base leading-8 text-muted-foreground sm:text-lg">
-                There is no right kind of design. The best part about custom
-                merch is that it doesn&apos;t have to make sense to anyone else.
-              </p>
-
-              <Link
-                href="/design"
-                className="group mt-9 inline-flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-3 text-sm font-bold transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-sm"
-              >
-                See what you can create
-                <ArrowRight className="size-4 text-primary transition-transform group-hover:translate-x-1" />
-              </Link>
-            </div>
-
-            {/* Collage */}
-            <div className="relative mx-auto h-[460px] w-full max-w-[570px] sm:h-[520px]">
-              <div className="absolute left-[8%] top-[5%] h-[70%] w-[62%] overflow-hidden rounded-[2rem] shadow-2xl transition-transform duration-500 hover:-rotate-1">
-                <img
-                  src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1000&q=90"
-                  alt="Creative apparel"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
-                />
-              </div>
-
-              <div className="absolute right-[2%] top-[13%] w-[40%] animate-float-delayed rotate-[6deg] rounded-2xl border-[7px] border-background bg-background p-1 shadow-xl">
-                <img
-                  src="https://images.unsplash.com/photo-1506629905607-d405b7a30db5?w=700&q=90"
-                  alt="Creative design"
-                  className="aspect-square w-full rounded-lg object-cover"
-                />
-              </div>
-
-              <div className="absolute bottom-[4%] left-[18%] -rotate-3 rounded-2xl bg-primary px-6 py-5 text-primary-foreground shadow-xl transition-transform duration-300 hover:-translate-y-1">
-                <p className="text-[10px] font-bold tracking-[0.18em] text-primary-foreground/70">
-                  YOUR STYLE
-                </p>
-                <p className="mt-1 text-xl font-extrabold">
-                  No templates
-                  <br />
-                  required.
-                </p>
-              </div>
-
-              <div className="absolute bottom-[19%] right-[2%] flex size-14 animate-float items-center justify-center rounded-full border border-primary/30 bg-primary/10">
-                <Sparkles className="size-6 text-primary" />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -605,9 +483,6 @@ export function Hero() {
 
             <div className="relative grid gap-10 lg:grid-cols-[1fr_0.6fr] lg:items-end">
               <div className="max-w-3xl">
-                <div className="flex size-12 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm">
-                  <Sparkles className="size-6" />
-                </div>
 
                 <h2 className="mt-7 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                   That idea in your head?
@@ -630,9 +505,6 @@ export function Hero() {
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
 
-                <p className="max-w-[250px] text-sm leading-6 text-primary-foreground/65 lg:text-right">
-                  Your idea. Your merch. A little AafnoInk magic.
-                </p>
               </div>
             </div>
           </div>
