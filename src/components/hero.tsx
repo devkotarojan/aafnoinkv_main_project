@@ -312,7 +312,7 @@ export function Hero() {
               <h2 className="mt-6 max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-6xl">
                 Because the best things
                 <span className="text-primary">
-                  {" "}don't look like everyone else's.
+                  {" "}don&apos;t look like everyone else&apos;s.
                 </span>
               </h2>
 
