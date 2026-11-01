@@ -71,11 +71,11 @@ export default function Navbar() {
                         key={String(index)}
                       >
                         <NavigationMenuLink
+                          asChild
                           data-active={(pathname === link.href) ? "" : undefined}
                           className="py-1.5"
-                          href={link.href}
                         >
-                          {link.label}
+                          <Link href={link.href}>{link.label}</Link>
                         </NavigationMenuLink>
                       </NavigationMenuItem>
                     ))}
@@ -86,20 +86,20 @@ export default function Navbar() {
           </div>
           {/* Main nav */}
           <div className="flex items-center gap-6">
-            <a className="text-primary hover:text-primary/90" href="#">
+            <Link className="text-primary hover:text-primary/90" href="/">
               <Logo />
-            </a>
+            </Link>
             {/* Navigation menu */}
             <NavigationMenu className="h-full *:h-full max-md:hidden">
               <NavigationMenuList className="h-full gap-2">
                 {navigationLinks.map((link, index) => (
                   <NavigationMenuItem className="h-full" key={String(index)}>
                     <NavigationMenuLink
+                      asChild
                       data-active={pathname === link.href ? "" : undefined}
                       className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary bg-transparent!"
-                      href={link.href}
                     >
-                      {link.label}
+                      <Link href={link.href}>{link.label}</Link>
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                 ))}
@@ -110,10 +110,10 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <Button asChild className="text-sm" size="lg" variant="outline">
-            <a href="#">Sign In</a>
+            <Link href="/login">Sign In</Link>
           </Button>
           <Button asChild className="text-sm font-light" variant="secondary" size="lg">
-            <a href="#">Sign Up</a>
+            <Link href="/signup">Sign Up</Link>
           </Button>
         </div>
       </div>
