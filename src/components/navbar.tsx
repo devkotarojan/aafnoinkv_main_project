@@ -1,3 +1,6 @@
+'use client';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,13 +17,14 @@ import {
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { active: true, href: "#", label: "Home" },
-  { href: "#", label: "Shop" },
-  { href: "#", label: "Design your own" },
-  { href: "#", label: "Inspiration" },
+  { href: "/", label: "Home" },
+  { href: "/shop", label: "Shop" },
+  { href: "/design-lab", label: "Design your own" },
+  { href: "/inspiration", label: "Inspiration" },
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
   return (
     <header className="sticky top-0 z-50 border-b px-4 md:px-11 bg-background">
       <div className="flex h-16 justify-between gap-4">
@@ -67,7 +71,7 @@ export default function Navbar() {
                         key={String(index)}
                       >
                         <NavigationMenuLink
-                          data-active={link.active ? "" : undefined}
+                          data-active={(pathname === link.href) ? "" : undefined}
                           className="py-1.5"
                           href={link.href}
                         >
@@ -91,8 +95,8 @@ export default function Navbar() {
                 {navigationLinks.map((link, index) => (
                   <NavigationMenuItem className="h-full" key={String(index)}>
                     <NavigationMenuLink
-                      data-active={link.active ? "" : undefined}
-                      className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary data-[active]:bg-transparent!"
+                      data-active={pathname === link.href ? "" : undefined}
+                      className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary bg-transparent!"
                       href={link.href}
                     >
                       {link.label}
