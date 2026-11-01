@@ -184,31 +184,31 @@ export function Hero() {
             </div>
 
             {/* Main product */}
-            <div className="absolute left-[12%] top-[12%] z-10 h-[74%] w-[72%] overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[-1deg] dark:bg-carda">
+            <div className="absolute left-[12%] top-[12%] z-10 h-[74%] w-[72%] overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[-3deg] dark:bg-carda">
               <img
                 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&q=90"
                 alt="Custom T-shirt"
                 className="h-full w-full object-cover"
               />
 
-              <div className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-black/35 px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-white backdrop-blur-md">
-                YOUR DESIGN, YOUR WAY
+              <div className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-secondary/35 px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-secondary-foreground backdrop-blur-md">
+                YOUR DESIGN, YOUR WEAR
               </div>
             </div>
 
             {/* Floating cards */}
-            <div className="absolute right-[1%] top-[3%] z-20 w-[32%] rotate-[7deg] animate-float-slow rounded-xl border-[6px] border-background bg-background p-1 shadow-xl">
+            <div className="absolute right-[1%] top-[3%] z-20 w-[32%] rotate-[7deg] animate-float-slow rounded-xl border-[6px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg]">
               <img
                 src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=85"
                 alt="Custom hoodie"
-                className="aspect-[4/5] w-full rounded-sm object-cover"
+                className="aspect-[4/5] w-full rounded-sm object-cover "
               />
               <p className="px-2 py-2 text-center text-[9px] font-bold tracking-[0.15em] text-foreground">
                 HOODIES
               </p>
             </div>
 
-            <div className="absolute right-[-1%] top-[39%] z-20 w-[30%] -rotate-[6deg] animate-float-delayed rounded-xl border-[6px] border-background bg-background p-1 shadow-xl">
+            <div className="absolute right-[-1%] top-[39%] z-20 w-[30%] -rotate-[6deg] animate-float-delayed rounded-xl border-[6px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg]">
               <img
                 src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&q=85"
                 alt="Custom tote bag"
