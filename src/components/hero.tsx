@@ -92,12 +92,10 @@ export function Hero() {
         {/* Soft background atmosphere */}
         <div className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[550px] w-[550px] rounded-full bg-primary/[0.045] blur-3xl" />
 
-
-
-        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-5 px-6 py-10 sm:px-10 sm:py-11 lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16 mt-0">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:gap-10 sm:px-10 sm:py-14 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
           {/* Hero content */}
           <div className="relative z-20 flex flex-col items-start lg:-translate-y-3">
-            <h1 className="max-w-[680px] text-[clamp(3rem,6vw,4.7rem)] font-extrabold leading-[0.95] tracking-[-0.07em]">
+            <h1 className="max-w-[680px] text-[clamp(2.8rem,12vw,4.7rem)] font-extrabold leading-[0.92] tracking-[-0.065em] sm:text-[clamp(3.5rem,7vw,4.7rem)]">
               Your Design.
               <br />
               Your Merch.
@@ -105,28 +103,29 @@ export function Hero() {
               <span className="text-primary">Made Easy.</span>
             </h1>
 
-            <p className="mt-7 max-w-[480px] text-base leading-8 text-muted-foreground sm:text-lg">
+            <p className="mt-6 max-w-[480px] text-base leading-7 text-muted-foreground sm:mt-7 sm:leading-8 sm:text-lg">
               Turn the ideas sitting in your head into something you can
               actually wear. Custom merch made around your creativity.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
+            {/* Mobile-friendly CTAs */}
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/design"
-                className="group inline-flex h-14 items-center gap-3 rounded-xl bg-primary px-7 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-primary px-7 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto"
               >
                 Start Designing
               </Link>
 
               <Link
                 href="/shop"
-                className="inline-flex h-14 items-center rounded-xl border border-border bg-card px-6 text-sm font-semibold transition-all duration-300 hover:bg-primary/[0.02]"
+                className="inline-flex h-14 w-full items-center justify-center rounded-xl border border-border bg-card px-6 text-sm font-semibold transition-all duration-300 hover:bg-primary/[0.02] sm:w-auto"
               >
                 Explore Products
               </Link>
             </div>
 
-            <div className="mt-9 flex items-center gap-3">
+            <div className="mt-8 flex items-center gap-3 sm:mt-9">
               <div className="flex -space-x-2">
                 <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E9D7C5] text-xs font-bold text-[#654B37]">
                   I
@@ -150,21 +149,23 @@ export function Hero() {
             </div>
           </div>
 
-          {/* Hero visual composition */}
-          <div className="relative mx-auto h-[480px] w-full max-w-[650px] sm:h-[540px] lg:h-[580px] lg:-translate-y-4">
-            
-            {/*Blobs */}
+          {/* ============================================================
+              HERO VISUAL
+          ============================================================ */}
+          <div className="relative mx-auto h-[350px] w-full max-w-[650px] sm:h-[500px] lg:h-[580px] lg:-translate-y-4">
+            {/* Background blob */}
             <div className="absolute inset-x-0 top-[6%] h-[84%] rotate-[-18deg] rounded-[42%_58%_35%_65%/_40%_55%_45%_60%] bg-[#F1ECE3] dark:bg-primary/5" />
 
-            <div className="absolute bottom-[10%] left-[8%] size-12 animate-pulse-soft rounded-full bg-primary/10"/>
+            <div className="absolute bottom-[10%] left-[8%] size-9 animate-pulse-soft rounded-full bg-primary/10 sm:size-12" />
 
-            <div className="absolute left-[7%] top-[0%] z-20 -rotate-12">
+            {/* Decorative handwritten text — hidden on small screens */}
+            <div className="absolute left-[7%] top-[0%] z-20 hidden -rotate-12 sm:block">
               <p className="font-sans text-sm leading-tight italic sm:text-base">
                 Made from
                 <br />
                 your imagination.
               </p>
-  
+
               <svg
                 viewBox="0 0 75 55"
                 fill="none"
@@ -180,42 +181,44 @@ export function Hero() {
             </div>
 
             {/* Main product */}
-            <div className="absolute left-[12%] top-[12%] z-10 h-[74%] w-[72%] overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[1deg] dark:bg-carda -rotate-3">
+            <div className="absolute left-[8%] top-[12%] z-10 h-[76%] w-[78%] -rotate-3 overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[1deg] sm:left-[12%] sm:h-[74%] sm:w-[72%] dark:bg-card">
               <img
                 src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1000&q=90"
                 alt="Custom T-shirt"
                 className="h-full w-full object-cover"
               />
 
-              <div className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-secondary/35 px-4 py-2 text-[10px] font-bold tracking-[0.14em] text-secondary-foreground backdrop-blur-md">
+              <div className="absolute bottom-3 left-3 rounded-full border border-white/30 bg-secondary/35 px-3 py-1.5 text-[8px] font-bold tracking-[0.12em] text-secondary-foreground backdrop-blur-md sm:bottom-5 sm:left-5 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.14em]">
                 YOUR DESIGN, YOUR WEAR
               </div>
             </div>
 
-            {/* Floating cards */}
-            <div className="absolute right-[1%] top-[3%] z-20 w-[32%] rotate-[7deg] animate-float-slow rounded-xl border-[6px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg]">
+            {/* Floating hoodie card */}
+            <div className="absolute right-[0%] top-[4%] z-20 w-[29%] rotate-[7deg] animate-float-slow rounded-xl border-[4px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg] sm:right-[1%] sm:top-[3%] sm:w-[32%] sm:border-[6px]">
               <img
                 src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=500&q=85"
                 alt="Custom hoodie"
-                className="aspect-[4/5] w-full rounded-sm object-cover "
+                className="aspect-[4/5] w-full rounded-sm object-cover"
               />
-              <p className="px-2 py-2 text-center text-[9px] font-bold tracking-[0.15em] text-foreground">
+              <p className="px-1 py-1.5 text-center text-[7px] font-bold tracking-[0.1em] text-foreground sm:px-2 sm:py-2 sm:text-[9px] sm:tracking-[0.15em]">
                 HOODIES
               </p>
             </div>
 
-            <div className="absolute right-[-1%] top-[39%] z-20 w-[30%] -rotate-[6deg] animate-float-delayed rounded-xl border-[6px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg]">
+            {/* Floating tote card */}
+            <div className="absolute right-[0%] top-[48%] z-20 w-[28%] -rotate-[6deg] animate-float-delayed rounded-xl border-[4px] border-background bg-background p-1 shadow-xl transition-transform duration-700 hover:rotate-[-1deg] sm:right-[-1%] sm:top-[39%] sm:w-[30%] sm:border-[6px]">
               <img
                 src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500&q=85"
                 alt="Custom tote bag"
                 className="aspect-[4/5] w-full rounded-sm object-cover"
               />
-              <p className="px-2 py-2 text-center text-[9px] font-bold tracking-[0.15em] text-foreground">
+              <p className="px-1 py-1.5 text-center text-[7px] font-bold tracking-[0.1em] text-foreground sm:px-2 sm:py-2 sm:text-[9px] sm:tracking-[0.15em]">
                 TOTE BAGS
               </p>
             </div>
 
-            <div className="absolute left-[1%] top-[36%] z-10 flex -rotate-45 flex-col gap-3">
+            {/* Decorative lines */}
+            <div className="absolute left-[1%] top-[36%] z-10 hidden -rotate-45 flex-col gap-3 sm:flex">
               <span className="h-1 w-9 rounded-full bg-primary" />
               <span className="ml-3 h-1 w-7 rounded-full bg-primary" />
               <span className="ml-5 h-1 w-5 rounded-full bg-primary" />
@@ -228,16 +231,16 @@ export function Hero() {
           BENEFITS
       ============================================================ */}
       <section className="border-y border-border bg-background">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:px-16">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 px-5 sm:grid-cols-2 sm:px-10 lg:grid-cols-4 lg:px-16">
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
 
             return (
               <div
                 key={benefit.title}
-                className={`flex items-center gap-4 py-7 transition-colors sm:px-5 ${
+                className={`flex items-center gap-4 py-6 transition-colors lg:px-5 ${
                   index !== 0
-                    ? "border-t border-border sm:border-l sm:border-t-0"
+                    ? "border-t border-border lg:border-l lg:border-t-0"
                     : ""
                 }`}
               >
@@ -260,18 +263,18 @@ export function Hero() {
       {/* ============================================================
           CREATIVE MANIFESTO
       ============================================================ */}
-      <section className="relative overflow-hidden py-24 lg:py-32">
+      <section className="relative overflow-hidden py-16 sm:py-20 lg:py-32">
         <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-[22vw] font-black leading-none tracking-[-0.09em] text-foreground/[0.025]">
           YOURS
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
             {/* Visual */}
-            <div className="relative mx-auto h-[440px] w-full max-w-[520px] sm:h-[500px]">
+            <div className="relative mx-auto h-[340px] w-full max-w-[520px] sm:h-[500px]">
               <div className="absolute inset-[7%] rotate-6 rounded-[2.5rem] bg-primary/10 animate-float-slow" />
 
-              <div className="absolute left-[4%] top-[8%] h-[70%] w-[72%] overflow-hidden rounded-[2rem] shadow-2xl">
+              <div className="absolute left-[4%] top-[8%] h-[70%] w-[72%] overflow-hidden rounded-[1.75rem] shadow-2xl sm:rounded-[2rem]">
                 <img
                   src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1000&q=90"
                   alt="Creative fashion"
@@ -279,39 +282,41 @@ export function Hero() {
                 />
               </div>
 
-              <div className="absolute right-[2%] top-[12%] flex size-22 animate-float-delayed rotate-12 flex-col items-center justify-center rounded-full bg-primary text-center text-primary-foreground shadow-xl">
-                <Sparkles className="size-6" />
-                <span className="mt-1 text-[10px] font-black leading-tight">
+              <div className="absolute right-[2%] top-[12%] flex size-16 animate-float-delayed rotate-12 flex-col items-center justify-center rounded-full bg-primary text-center text-primary-foreground shadow-xl sm:size-22">
+                <Sparkles className="size-5 sm:size-6" />
+                <span className="mt-1 text-[8px] font-black leading-tight sm:text-[10px]">
                   MADE
                   <br />
                   BY YOU
                 </span>
               </div>
 
-              <div className="absolute bottom-[4%] right-[5%] max-w-[210px] -rotate-3 rounded-2xl border border-border bg-background p-5 shadow-xl transition-transform duration-300 hover:-translate-y-1">
-                <p className="text-xs font-bold text-primary">NO BORING MERCH.</p>
-                <p className="mt-2 text-sm font-semibold leading-6">
+              <div className="absolute bottom-[2%] right-[2%] max-w-[180px] -rotate-3 rounded-2xl border border-border bg-background p-4 shadow-xl transition-transform duration-300 hover:-translate-y-1 sm:bottom-[4%] sm:right-[5%] sm:max-w-[210px] sm:p-5">
+                <p className="text-[10px] font-bold text-primary sm:text-xs">
+                  NO BORING MERCH.
+                </p>
+                <p className="mt-2 text-xs font-semibold leading-5 sm:text-sm sm:leading-6">
                   Express yourself with what you wear
                 </p>
               </div>
-
             </div>
 
             {/* Text */}
             <div className="lg:pl-10">
-
-              <h2 className="mt-7 max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
+              <h2 className="max-w-2xl text-4xl font-extrabold leading-[1.03] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                 The best things
                 <span className="text-primary">
-                  {" "}don&apos;t look like everyone else&apos;s.
+                  {" "}
+                  don&apos;t look like everyone else&apos;s.
                 </span>
               </h2>
 
-              <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
-                AafnoInk is built to turn your ideas into reality. Make your memory a part of your everyday life.
+              <p className="mt-5 max-w-xl text-base leading-7 text-muted-foreground sm:leading-8 sm:text-lg">
+                AafnoInk is built to turn your ideas into reality. Make your
+                memory a part of your everyday life.
               </p>
 
-              <div className="mt-9 grid gap-4 sm:grid-cols-2">
+              <div className="mt-8 grid gap-3 sm:mt-9 sm:grid-cols-2 sm:gap-4">
                 {[
                   "Made around your creativity",
                   "Preview before you print",
@@ -337,16 +342,16 @@ export function Hero() {
       {/* ============================================================
           HOW IT WORKS
       ============================================================ */}
-      <section className="relative overflow-hidden border-y border-border bg-[#F5F2EC] py-24 dark:bg-card/30 lg:py-32">
-
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+      <section className="relative overflow-hidden border-y border-border bg-[#F5F2EC] py-16 dark:bg-card/30 sm:py-20 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
             <div className="max-w-2xl">
-
-              <h2 className="mt-5 text-4xl font-extrabold tracking-[-0.055em] sm:text-5xl">
+              <h2 className="text-4xl font-extrabold tracking-[-0.055em] sm:text-5xl">
                 Three steps.
                 <br />
-                <span className="text-primary">One very personal result.</span>
+                <span className="text-primary">
+                  One very personal result.
+                </span>
               </h2>
             </div>
 
@@ -356,21 +361,20 @@ export function Hero() {
             </p>
           </div>
 
-          <div className="relative mt-14 grid gap-5 md:grid-cols-3 lg:mt-20">
+          <div className="relative mt-10 grid gap-5 md:mt-14 md:grid-cols-3 lg:mt-20">
             {steps.map((step, index) => {
               const Icon = step.icon;
 
               return (
                 <div
                   key={step.number}
-                  className={`group relative overflow-hidden rounded-[1.75rem] border border-border bg-background p-7 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl ${
+                  className={`group relative overflow-hidden rounded-[1.75rem] border border-border bg-background p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl sm:p-7 ${
                     index === 1 ? "md:translate-y-8" : ""
                   }`}
                 >
-
                   <div className="relative flex items-center justify-between">
-                    <div className="flex size-13 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-6">
-                      <Icon className="size-6" />
+                    <div className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-6 sm:size-13">
+                      <Icon className="size-5 sm:size-6" />
                     </div>
 
                     <span className="text-xl font-black tracking-[0.15em] text-primary">
@@ -378,14 +382,14 @@ export function Hero() {
                     </span>
                   </div>
 
-                  <div className="relative mt-10">
+                  <div className="relative mt-8 sm:mt-10">
                     <h3 className="text-xl font-bold">{step.title}</h3>
                     <p className="mt-3 leading-7 text-muted-foreground">
                       {step.description}
                     </p>
                   </div>
 
-                  <div className="relative mt-8 h-px w-full overflow-hidden bg-border">
+                  <div className="relative mt-7 h-px w-full overflow-hidden bg-border sm:mt-8">
                     <div className="absolute inset-y-0 left-0 w-0 bg-primary transition-all duration-500 group-hover:w-full" />
                   </div>
                 </div>
@@ -396,19 +400,16 @@ export function Hero() {
       </section>
 
       {/* ============================================================
-          PICK YOUR CANVAS — LIGHT & WARM
+          PICK YOUR CANVAS
       ============================================================ */}
-      <section className="relative overflow-hidden bg-[#F8F6F1] py-24 dark:bg-background lg:py-32">
+      <section className="relative overflow-hidden bg-background py-16 dark:bg-background sm:py-20 lg:py-32">
         {/* Decorative background */}
         <div className="pointer-events-none absolute -left-24 top-10 size-80 animate-float-slow rounded-full border border-primary/10" />
-        <div className="pointer-events-none absolute left-[7%] top-[48%] text-primary/50 animate-float">
-        </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="relative mx-auto max-w-7xl px-5 sm:px-10 lg:px-16">
+          <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-
-              <h2 className="mt-5 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
+              <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                 Start with something
                 <br />
                 <span className="text-primary">worth making yours.</span>
@@ -417,7 +418,7 @@ export function Hero() {
 
             <Link
               href="/shop"
-              className="group inline-flex items-center gap-3 text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
+              className="group inline-flex items-center gap-3 self-start text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
             >
               Explore the collection
               <span className="flex size-10 items-center justify-center rounded-full border border-border bg-background transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
@@ -427,12 +428,12 @@ export function Hero() {
           </div>
 
           {/* Product cards */}
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
             {products.map((product, index) => (
               <Link
                 key={product.title}
                 href="/shop"
-                className={`group relative min-h-[300px] overflow-hidden rounded-2xl border border-border/70 bg-background shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl ${
+                className={`group relative min-h-[280px] overflow-hidden rounded-2xl border border-border/70 bg-background shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:min-h-[300px] ${
                   index === 0 ? "sm:col-span-2" : ""
                 }`}
               >
@@ -464,7 +465,6 @@ export function Hero() {
                 </div>
               </Link>
             ))}
-
           </div>
         </div>
       </section>
@@ -472,39 +472,38 @@ export function Hero() {
       {/* ============================================================
           FINAL CTA
       ============================================================ */}
-      <section className="relative px-6 pb-24 sm:px-10 lg:px-16 lg:pb-32">
+      <section className="relative px-5 pb-16 sm:px-10 sm:pb-24 lg:px-16 lg:pb-32">
         <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[2rem] bg-primary px-7 py-16 text-primary-foreground shadow-xl shadow-primary/10 sm:px-12 lg:px-20 lg:py-20">
+          <div className="relative overflow-hidden rounded-[1.5rem] bg-primary px-6 py-12 text-primary-foreground shadow-xl shadow-primary/10 sm:rounded-[2rem] sm:px-12 sm:py-16 lg:px-20 lg:py-20">
             <div className="absolute -left-20 -top-20 size-64 animate-float-slow rounded-full border-[30px] border-white/10" />
             <div className="absolute -bottom-28 -right-16 size-80 animate-pulse-soft rounded-full border-[45px] border-white/10" />
-            <div className="absolute right-[13%] top-10 rotate-12 text-7xl text-white/10 animate-float">
+
+            <div className="absolute right-[13%] top-10 hidden rotate-12 text-7xl text-white/10 animate-float sm:block">
               ✦
             </div>
 
-            <div className="relative grid gap-10 lg:grid-cols-[1fr_0.6fr] lg:items-end">
+            <div className="relative grid gap-8 lg:grid-cols-[1fr_0.6fr] lg:items-end lg:gap-10">
               <div className="max-w-3xl">
-
-                <h2 className="mt-7 text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
+                <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
                   That idea in your head?
                   <br />
                   Let&apos;s put it on something.
                 </h2>
 
-                <p className="mt-6 max-w-xl text-base leading-8 text-primary-foreground/80 sm:text-lg">
+                <p className="mt-5 max-w-xl text-base leading-7 text-primary-foreground/80 sm:mt-6 sm:leading-8 sm:text-lg">
                   Don&apos;t save it for later. Open the canvas, play around, and
                   make something that feels completely yours.
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-5 lg:items-end">
+              <div className="flex flex-col items-stretch gap-5 sm:items-start lg:items-end">
                 <Link
                   href="/design"
-                  className="group inline-flex h-14 items-center gap-3 rounded-xl bg-background px-7 text-sm font-bold text-foreground shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                  className="group inline-flex h-14 items-center justify-center gap-3 rounded-xl bg-background px-7 text-sm font-bold text-foreground shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
                 >
                   Start Creating
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </Link>
-
               </div>
             </div>
           </div>
