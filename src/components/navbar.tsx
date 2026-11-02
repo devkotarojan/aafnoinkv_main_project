@@ -31,10 +31,84 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-background px-4 md:px-11">
-      <div className="flex h-16 items-center justify-between gap-4">
+      <div className="relative flex h-16 items-center justify-between gap-4">
+        {/* Mobile Sheet Navigation */}
+        <div className="md:hidden">
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="size-10"
+              >
+                <Menu className="size-5" />
+                <span className="sr-only">Open navigation menu</span>
+              </Button>
+            </SheetTrigger>
+
+            <SheetContent
+              side="left"
+              className="flex w-[85vw] max-w-[360px] flex-col p-6 bg-background"
+            >
+              {/* Mobile logo */}
+              <Link
+                href="/"
+                className="flex w-fit items-center text-primary"
+              >
+                <Logo />
+                <p className="ml-3 text-lg font-semibold text-card-foreground">
+                  AafnoInk
+                </p>
+              </Link>
+
+              {/* Mobile links */}
+              <nav className="mt-10 flex flex-col gap-1">
+                {navigationLinks.map((link) => {
+                  const isActive = pathname === link.href;
+
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${
+                        isActive
+                          ? "bg-primary/10 text-secondary"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              {/* Mobile actions */}
+              <div className="mt-auto border-t pt-6">
+                <div className="flex flex-col gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-12 w-full"
+                  >
+                    <Link href="/login">Sign In</Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    variant="secondary"
+                    className="h-12 w-full"
+                  >
+                    <Link href="/signup">Sign Up</Link>
+                  </Button>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+
         {/* Left side — Logo + Desktop Navigation */}
         <div className="flex items-center gap-6 h-full">
-          <div className="flex items-center gap-2">
+          <div className="absolute left-1/2 flex -translate-x-1/2 items-center gap-2 md:static md:translate-x-0">
             <Link
               className="text-primary hover:text-primary/90"
               href="/"
@@ -90,79 +164,6 @@ export default function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Sheet Navigation */}
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="size-10"
-                >
-                  <Menu className="size-5" />
-                  <span className="sr-only">Open navigation menu</span>
-                </Button>
-              </SheetTrigger>
-
-              <SheetContent
-                side="right"
-                className="flex w-[85vw] max-w-[360px] flex-col p-6 bg-background"
-              >
-                {/* Mobile logo */}
-                <Link
-                  href="/"
-                  className="flex w-fit items-center text-primary"
-                >
-                  <Logo />
-                  <p className="ml-3 text-lg font-semibold text-card-foreground">
-                    AafnoInk
-                  </p>
-                </Link>
-
-                {/* Mobile links */}
-                <nav className="mt-10 flex flex-col gap-1">
-                  {navigationLinks.map((link) => {
-                    const isActive = pathname === link.href;
-
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className={`flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${
-                          isActive
-                            ? "bg-primary/10 text-secondary"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    );
-                  })}
-                </nav>
-
-                {/* Mobile actions */}
-                <div className="mt-auto border-t pt-6">
-                  <div className="flex flex-col gap-3">
-                    <Button
-                      asChild
-                      variant="outline"
-                      className="h-12 w-full"
-                    >
-                      <Link href="/login">Sign In</Link>
-                    </Button>
-
-                    <Button
-                      asChild
-                      variant="secondary"
-                      className="h-12 w-full"
-                    >
-                      <Link href="/signup">Sign Up</Link>
-                    </Button>
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
         </div>
       </div>
     </header>
