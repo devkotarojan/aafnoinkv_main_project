@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "./ui/button";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -109,19 +110,18 @@ export function Hero() {
 
             {/* Mobile-friendly CTAs */}
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <Link
-                href="/design"
-                className="group inline-flex h-14 w-full items-center justify-center gap-3 rounded-xl bg-primary px-7 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-auto"
-              >
-                Start Designing
-              </Link>
+              <Button asChild size="lg" className="h-14 w-full sm:w-auto">
+                <Link href="/design">Start Designing</Link>
+              </Button>
 
-              <Link
-                href="/shop"
-                className="inline-flex h-14 w-full items-center justify-center rounded-xl border border-border bg-card px-6 text-sm font-semibold transition-all duration-300 hover:bg-primary/[0.02] sm:w-auto"
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="h-14 w-full sm:w-auto"
               >
-                Explore Products
-              </Link>
+                <Link href="/shop">Explore Products</Link>
+              </Button>
             </div>
 
             <div className="hidden lg:flex mt-8 items-center gap-3 sm:mt-9">

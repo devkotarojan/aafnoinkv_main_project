@@ -57,7 +57,7 @@ export default function Navbar() {
                     data-active={
                       pathname === link.href ? "" : undefined
                     }
-                    className="h-full justify-center rounded-none border-y-2 border-transparent bg-transparent! py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary"
+                    className="h-full justify-center rounded-none border-y-2 border-transparent bg-transparent! py-1.5 font-medium text-sm-foreground hover:bg-transparent hover:text-primary data-[active]:border-b-primary"
                   >
                     <Link href={link.href}>{link.label}</Link>
                   </NavigationMenuLink>
