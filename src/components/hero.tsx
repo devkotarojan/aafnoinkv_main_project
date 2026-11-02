@@ -92,7 +92,7 @@ export function Hero() {
       <section className="relative isolate">
         {/* Soft background atmosphere */}
 
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:gap-10 sm:px-10 sm:py-10 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-8 sm:gap-10 sm:px-10 sm:py-10 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
           {/* Hero content */}
           <div className="relative z-20 flex flex-col items-center lg:-translate-y-3 lg:items-start">
             <h1 className="max-w-[680px] text-[clamp(2.8rem,12vw,4.7rem)] font-extrabold leading-[0.92] tracking-[-0.065em] sm:text-[clamp(3.5rem,7vw,4.7rem)]">
@@ -109,8 +109,9 @@ export function Hero() {
             </p>
 
             {/* Mobile-friendly CTAs */}
-            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <Button asChild size="lg" className="h-14 w-full sm:w-auto">
+            <div className="mt-8 flex gap-3 w-auto flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <Button asChild size="lg" 
+                className="h-12 rounded-md px-5 text-xs md:px-8 md:text-sm md:h-14 md:w-auto">
                 <Link href="/design">Start Designing</Link>
               </Button>
 
@@ -118,7 +119,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="h-14 w-full sm:w-auto"
+                className="h-12 rounded-md px-5 text-xs md:px-8 md:text-sm md:h-14 md:w-auto"
               >
                 <Link href="/shop">Explore Products</Link>
               </Button>
