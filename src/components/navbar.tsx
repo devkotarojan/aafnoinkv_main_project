@@ -34,12 +34,15 @@ export default function Navbar() {
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side — Logo + Desktop Navigation */}
         <div className="flex items-center gap-6 h-full">
-          <Link
-            className="text-primary hover:text-primary/90"
-            href="/"
-          >
-            <Logo />
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              className="text-primary hover:text-primary/90"
+              href="/"
+            >
+              <Logo />
+            </Link>
+              <p className="md:hidden font-semibold text-lg">AafnoInk</p>
+          </div>
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden h-full md:flex [&>div]:h-full">
@@ -111,7 +114,7 @@ export default function Navbar() {
                   className="flex w-fit items-center text-primary"
                 >
                   <Logo />
-                  <p className="ml-3 text-xl font-medium text-card-foreground">
+                  <p className="ml-3 text-lg font-semibold text-card-foreground">
                     AafnoInk
                   </p>
                 </Link>
