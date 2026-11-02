@@ -127,13 +127,13 @@ export function Hero() {
 
             <div className="mt-8 flex items-center gap-3 sm:mt-9">
               <div className="flex -space-x-2">
-                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E9D7C5] text-xs font-bold text-[#654B37]">
+                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E9D7C5] text-xs font-bold text-secondary">
                   I
                 </div>
-                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#D7E0D1] text-xs font-bold text-[#40513C]">
+                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#D7E0D1] text-xs font-bold text-secondary">
                   N
                 </div>
-                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E8D5D8] text-xs font-bold text-[#724B55]">
+                <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E8D5D8] text-xs font-bold text-secondary">
                   K
                 </div>
               </div>
@@ -373,7 +373,7 @@ export function Hero() {
                   }`}
                 >
                   <div className="relative flex items-center justify-between">
-                    <div className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 group-hover:rotate-6 sm:size-13">
+                    <div className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 sm:size-13">
                       <Icon className="size-5 sm:size-6" />
                     </div>
 

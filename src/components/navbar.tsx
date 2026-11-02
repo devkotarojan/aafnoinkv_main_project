@@ -1,21 +1,24 @@
-'use client';
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { Menu } from "lucide-react";
+
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
-// Navigation links array to be used in both desktop and mobile menus
+// Navigation links shared by desktop and mobile
 const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
@@ -25,96 +28,138 @@ const navigationLinks = [
 
 export default function Navbar() {
   const pathname = usePathname();
+
   return (
-    <header className="sticky top-0 z-50 border-b px-4 md:px-11 bg-background">
-      <div className="flex h-16 justify-between gap-4">
-        {/* Left side */}
-        <div className="flex gap-2">
-          <div className="flex items-center md:hidden">
-            {/* Mobile menu trigger */}
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button className="group size-8" size="icon" variant="ghost">
-                  <svg
-                    className="pointer-events-none"
-                    fill="none"
-                    height={16}
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                    width={16}
-                    xmlns="http://www.w3.org/2000/svg"
+    <header className="sticky top-0 z-50 border-b bg-background px-4 md:px-11">
+      <div className="flex h-16 items-center justify-between gap-4">
+        {/* Left side — Logo + Desktop Navigation */}
+        <div className="flex items-center gap-6 h-full">
+          <Link
+            className="text-primary hover:text-primary/90"
+            href="/"
+          >
+            <Logo />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <NavigationMenu className="hidden h-full md:flex [&>div]:h-full">
+            <NavigationMenuList className="h-full gap-2">
+              {navigationLinks.map((link) => (
+                <NavigationMenuItem
+                  className="h-full"
+                  key={link.href}
+                >
+                  <NavigationMenuLink
+                    asChild
+                    data-active={
+                      pathname === link.href ? "" : undefined
+                    }
+                    className="h-full justify-center rounded-none border-y-2 border-transparent bg-transparent! py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary"
                   >
-                    <path
-                      className="-translate-y-[7px] origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-315"
-                      d="M4 12L20 12"
-                    />
-                    <path
-                      className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-                      d="M4 12H20"
-                    />
-                    <path
-                      className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-135"
-                      d="M4 12H20"
-                    />
-                  </svg>
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent align="start" className="w-36 p-1 md:hidden">
-                <NavigationMenu className="max-w-none *:w-full">
-                  <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                    {navigationLinks.map((link, index) => (
-                      <NavigationMenuItem
-                        className="w-full"
-                        key={String(index)}
-                      >
-                        <NavigationMenuLink
-                          asChild
-                          data-active={(pathname === link.href) ? "" : undefined}
-                          className="py-1.5"
-                        >
-                          <Link href={link.href}>{link.label}</Link>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    ))}
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </PopoverContent>
-            </Popover>
-          </div>
-          {/* Main nav */}
-          <div className="flex items-center gap-6">
-            <Link className="text-primary hover:text-primary/90" href="/">
-              <Logo />
-            </Link>
-            {/* Navigation menu */}
-            <NavigationMenu className="h-full *:h-full max-md:hidden">
-              <NavigationMenuList className="h-full gap-2">
-                {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem className="h-full" key={String(index)}>
-                    <NavigationMenuLink
-                      asChild
-                      data-active={pathname === link.href ? "" : undefined}
-                      className="h-full justify-center rounded-none border-transparent border-y-2 py-1.5 font-medium text-sm-foreground hover:border-b-primary hover:bg-transparent hover:text-primary data-[active]:border-b-primary bg-transparent!"
-                    >
-                      <Link href={link.href}>{link.label}</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+                    <Link href={link.href}>{link.label}</Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
         </div>
+
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild className="text-sm" size="lg" variant="outline">
-            <Link href="/login">Sign In</Link>
-          </Button>
-          <Button asChild className="text-sm font-light" variant="secondary" size="lg">
-            <Link href="/signup">Sign Up</Link>
-          </Button>
+          {/* Desktop buttons */}
+          <div className="hidden items-center gap-2 md:flex">
+            <Button
+              asChild
+              className="text-sm"
+              size="lg"
+              variant="outline"
+            >
+              <Link href="/login">Sign In</Link>
+            </Button>
+
+            <Button
+              asChild
+              className="text-sm font-light"
+              size="lg"
+              variant="secondary"
+            >
+              <Link href="/signup">Sign Up</Link>
+            </Button>
+          </div>
+
+          {/* Mobile Sheet Navigation */}
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="size-10"
+                >
+                  <Menu className="size-5" />
+                  <span className="sr-only">Open navigation menu</span>
+                </Button>
+              </SheetTrigger>
+
+              <SheetContent
+                side="right"
+                className="flex w-[85vw] max-w-[360px] flex-col p-6"
+              >
+                {/* Mobile logo */}
+                <Link
+                  href="/"
+                  className="flex w-fit items-center text-primary"
+                >
+                  <Logo />
+                  <p className="ml-3 text-xl font-medium text-card-foreground">
+                    AafnoInk
+                  </p>
+                </Link>
+
+                {/* Mobile links */}
+                <nav className="mt-10 flex flex-col gap-1">
+                  {navigationLinks.map((link) => {
+                    const isActive = pathname === link.href;
+
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${
+                          isActive
+                            ? "bg-primary/10 text-secondary"
+                            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+
+                {/* Mobile actions */}
+                <div className="mt-auto border-t pt-6">
+                  <div className="flex flex-col gap-3">
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="h-12 w-full"
+                    >
+                      <Link href="/login">Sign In</Link>
+                    </Button>
+
+                    <Button
+                      asChild
+                      variant="secondary"
+                      className="h-12 w-full"
+                    >
+                      <Link href="/signup">Sign Up</Link>
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
