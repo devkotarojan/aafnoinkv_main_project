@@ -408,24 +408,22 @@ export function Hero() {
           </div>
 
           {/* Product cards */}
-          <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product, index) => (
               <Link
                 key={product.title}
                 href="/shop"
-                className={`group relative min-h-[280px] overflow-hidden rounded-2xl border border-border/70 bg-background shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:min-h-[300px] ${
-                  index === 0 ? "sm:col-span-2" : ""
-                }`}
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border/70 bg-muted shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
               >
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]"
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-                <span className="absolute right-5 top-5 rounded-full bg-background/80 px-2.5 py-1 text-[9px] font-bold tracking-[0.18em] text-foreground backdrop-blur-sm">
+                <span className="absolute right-4 top-4 rounded-full bg-background/85 px-2.5 py-1 text-[9px] font-bold tracking-[0.18em] text-foreground backdrop-blur-sm">
                   0{index + 1}
                 </span>
 
