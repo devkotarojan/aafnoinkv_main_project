@@ -62,7 +62,7 @@ export function ProductDetail({ product }: { product: Product }) {
           {/* Image gallery */}
           <div className="space-y-4">
             {/* Main image */}
-            <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-muted">
+            <div className="aspect-[9/8] overflow-hidden rounded-2xl bg-muted">
               <Image
                 src={selectedImage.src}
                 alt={selectedImage.alt}
@@ -80,7 +80,7 @@ export function ProductDetail({ product }: { product: Product }) {
                   onClick={() => setSelectedImage(image)}
                   aria-label={`View ${image.alt}`}
                   className={cn(
-                    "relative aspect-[3/4] overflow-hidden rounded-xl transition-all",
+                    "relative aspect-[4/4] overflow-hidden rounded-xl transition-all",
                     selectedImage.src === image.src
                       ? "ring-2 ring-primary ring-offset-2"
                       : "opacity-70 hover:opacity-100"

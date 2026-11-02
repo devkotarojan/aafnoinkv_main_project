@@ -24,10 +24,10 @@ export interface ProductCardData {
 export function ProductCard({ product }: { product: ProductCardData }) {
   return (
     <Link href={product.href} className="group block focus-visible:outline-none">
-      <Card className="h-full overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Card className="h-full pt-0 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <CardContent className="flex h-full flex-col p-0">
           {/* Image — fixed aspect so every card is the same height */}
-          <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+          <div className="relative aspect-[5/5] w-full overflow-hidden bg-muted">
             <Image
               src={product.imageSrc}
               alt={product.imageAlt}

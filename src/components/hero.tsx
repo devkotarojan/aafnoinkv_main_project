@@ -357,7 +357,7 @@ export function Hero() {
                       <Icon className="size-5 sm:size-6" />
                     </div>
 
-                    <span className="text-xl font-black tracking-[0.15em] text-primary">
+                    <span className="text-xl font-black tracking-[0.15em] text-foreground">
                       {step.number}
                     </span>
                   </div>
@@ -390,30 +390,27 @@ export function Hero() {
           <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
               <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.055em] sm:text-5xl lg:text-7xl">
-                Start with something
+                Pick one
                 <br />
-                <span className="text-primary">worth making yours.</span>
+                <span className="text-primary">To design</span>
               </h2>
             </div>
 
-            <Link
-              href="/shop"
-              className="group inline-flex items-center gap-3 self-start text-sm font-bold text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Explore the collection
-              <span className="flex size-10 items-center justify-center rounded-full border border-border bg-background transition-all duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-primary-foreground">
+            <Button asChild variant="link" className="self-start text-lg font-medium text-foreground">
+              <Link href="/shop" className="group">
+                Explore the collection
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           {/* Product cards */}
           <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, index) => (
+            {products.map((product) => (
               <Link
                 key={product.title}
                 href="/shop"
-                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-border/70 bg-muted shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+                className="group relative aspect-[5/5] overflow-hidden rounded-2xl border border-border/70 bg-muted shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
               >
                 <img
                   src={product.image}
@@ -423,15 +420,9 @@ export function Hero() {
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-                <span className="absolute right-4 top-4 rounded-full bg-background/85 px-2.5 py-1 text-[9px] font-bold tracking-[0.18em] text-foreground backdrop-blur-sm">
-                  0{index + 1}
-                </span>
 
                 <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
                   <div>
-                    <p className="text-[9px] font-bold tracking-[0.2em] text-primary">
-                      {product.label}
-                    </p>
                     <h3 className="mt-2 text-xl font-bold text-white">
                       {product.title}
                     </h3>
@@ -475,13 +466,17 @@ export function Hero() {
               </div>
 
               <div className="flex flex-col items-stretch gap-5 sm:items-start lg:items-end">
-                <Link
-                  href="/design"
-                  className="group inline-flex h-14 items-center justify-center gap-3 rounded-xl bg-background px-7 text-sm font-bold text-foreground shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+                <Button
+                  asChild
+                  variant="secondary"
+                  size="lg"
+                  className="h-14 text-base"
                 >
-                  Start Creating
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                  <Link href="/design" className="group">
+                    Start Creating
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
             </div>
           </div>
