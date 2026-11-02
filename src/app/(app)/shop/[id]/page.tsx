@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
-import { ProductDetail } from "@/components/product-detail";
-import { RelatedProducts } from "@/components/related-products";
+import { ProductDetail } from "@/components/products/product-detail";
+import { RelatedProducts } from "@/components/products/related-products";
 import { getProduct, getRelatedProducts } from "@/data/products";
 
 export default async function ProductPage(props: PageProps<"/shop/[id]">) {

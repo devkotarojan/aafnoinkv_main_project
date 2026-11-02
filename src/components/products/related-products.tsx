@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 
-import { ProductCard } from "@/components/product-card";
+import { ProductCard } from "@/components/products/product-card";
 import type { Product } from "@/data/products";
 
 export function RelatedProducts({

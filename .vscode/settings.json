@@ -20,6 +20,12 @@
     ".gitignore": true,
     "README.md": true,
     ".next": true,
-    "tsconfig.tsbuildinfo": true
+    "tsconfig.tsbuildinfo": true,
+    "AGENTS.md": true,
+    "components.json": true,
+    "next.config.ts": true,
+    "package.json": true,
+    "prisma7.config.ts": true,
+    "tsconfig.json": true
   }
 }

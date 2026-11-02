@@ -2,11 +2,11 @@
 //for reload
 export const dynamic = "force-dynamic";
 
-import { LoginForm } from "@/components/login-form"
+import { LoginForm } from "@/components/auth/login-form"
 import { GalleryVerticalEndIcon } from "lucide-react"
 import { Shield } from "lucide-react"
 import Link from "next/link";
-import Logo from "@/components/logo";
+import Logo from "@/components/layout/logo";
 
 export default function LoginPage() {
   return (

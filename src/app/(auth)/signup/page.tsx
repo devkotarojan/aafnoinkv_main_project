@@ -2,9 +2,9 @@
 //for reload
 export const dynamic = "force-dynamic";
 
-import { SignupForm } from "@/components/signup-form"
+import { SignupForm } from "@/components/auth/signup-form"
 import Link from "next/link";
-import Logo from "@/components/logo";
+import Logo from "@/components/layout/logo";
 
 export default function SignupPage() {
   return (

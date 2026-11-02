@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
-import Logo from "@/components/logo";
+import Logo from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -70,11 +70,10 @@ export default function Navbar() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${
-                        isActive
-                          ? "bg-primary/10 text-secondary"
-                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                      }`}
+                      className={`flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors ${isActive
+                        ? "bg-primary/10 text-secondary"
+                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                        }`}
                     >
                       {link.label}
                     </Link>
@@ -115,7 +114,7 @@ export default function Navbar() {
             >
               <Logo />
             </Link>
-              <p className="md:hidden font-semibold text-lg">AafnoInk</p>
+            <p className="md:hidden font-semibold text-lg">AafnoInk</p>
           </div>
 
           {/* Desktop Navigation */}

@@ -2,9 +2,9 @@
 //for reload
 export const dynamic = "force-dynamic";
 
-import { ForgotPasswordForm } from "@/components/forgot-password-form"
+import { ForgotPasswordForm } from "@/components/auth/forgot-password-form"
 import Link from "next/link";
-import Logo from "@/components/logo";
+import Logo from "@/components/layout/logo";
 
 export default function ForgotPasswordPage() {
   return (

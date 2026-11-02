@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -110,7 +110,7 @@ export function Hero() {
 
             {/* Mobile-friendly CTAs */}
             <div className="mt-8 flex gap-3 w-auto flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <Button asChild size="lg" 
+              <Button asChild size="lg"
                 className="h-12 rounded-md px-5 text-xs md:px-8 md:text-sm md:h-14 md:w-auto">
                 <Link href="/design">Start Designing</Link>
               </Button>
@@ -169,7 +169,7 @@ export function Hero() {
               />
 
               <div className="absolute bottom-3 left-3 rounded-full border border-white/30 bg-secondary/35 px-3 py-1.5 text-[8px] font-bold tracking-[0.12em] text-secondary-foreground backdrop-blur-md sm:bottom-5 sm:left-5 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.14em]">
-              YOUR DESIGN, YOUR WEAR
+                YOUR DESIGN, YOUR WEAR
               </div>
             </div>
 
@@ -218,11 +218,10 @@ export function Hero() {
             return (
               <div
                 key={benefit.title}
-                className={`flex items-center gap-4 py-6 transition-colors lg:px-5 ${
-                  index !== 0
-                    ? "border-t border-border lg:border-l lg:border-t-0"
-                    : ""
-                }`}
+                className={`flex items-center gap-4 py-6 transition-colors lg:px-5 ${index !== 0
+                  ? "border-t border-border lg:border-l lg:border-t-0"
+                  : ""
+                  }`}
               >
                 <div className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/10 transition-transform duration-300 hover:scale-110">
                   <Icon className="size-5 text-primary" />
@@ -348,9 +347,8 @@ export function Hero() {
               return (
                 <div
                   key={step.number}
-                  className={`group relative overflow-hidden rounded-[1.75rem] border border-border bg-background p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl sm:p-7 ${
-                    index === 1 ? "md:translate-y-8" : ""
-                  }`}
+                  className={`group relative overflow-hidden rounded-[1.75rem] border border-border bg-background p-6 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl sm:p-7 ${index === 1 ? "md:translate-y-8" : ""
+                    }`}
                 >
                   <div className="relative flex items-center justify-between">
                     <div className="flex size-12 items-center justify-center rounded-2xl bg-primary text-primary-foreground shadow-lg shadow-primary/20 transition-transform duration-300 sm:size-13">
