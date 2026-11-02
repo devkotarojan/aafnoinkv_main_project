@@ -106,7 +106,7 @@ export default function Navbar() {
 
               <SheetContent
                 side="right"
-                className="flex w-[85vw] max-w-[360px] flex-col p-6"
+                className="flex w-[85vw] max-w-[360px] flex-col p-6 bg-background"
               >
                 {/* Mobile logo */}
                 <Link

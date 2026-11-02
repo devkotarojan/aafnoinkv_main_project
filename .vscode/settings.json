@@ -19,6 +19,7 @@
     ".env": true,
     ".gitignore": true,
     "README.md": true,
-    ".next": true
+    ".next": true,
+    "tsconfig.tsbuildinfo": true
   }
 }

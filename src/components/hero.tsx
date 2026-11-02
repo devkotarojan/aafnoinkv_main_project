@@ -90,11 +90,10 @@ export function Hero() {
       ============================================================ */}
       <section className="relative isolate">
         {/* Soft background atmosphere */}
-        <div className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[550px] w-[550px] rounded-full bg-primary/[0.045] blur-3xl" />
 
-        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:gap-10 sm:px-10 sm:py-14 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 py-10 sm:gap-10 sm:px-10 sm:py-10 lg:min-h-[620px] lg:grid-cols-[0.92fr_1.08fr] lg:gap-8 lg:px-16">
           {/* Hero content */}
-          <div className="relative z-20 flex flex-col items-start lg:-translate-y-3">
+          <div className="relative z-20 flex flex-col items-center lg:-translate-y-3 lg:items-start">
             <h1 className="max-w-[680px] text-[clamp(2.8rem,12vw,4.7rem)] font-extrabold leading-[0.92] tracking-[-0.065em] sm:text-[clamp(3.5rem,7vw,4.7rem)]">
               Your Design.
               <br />
@@ -103,8 +102,8 @@ export function Hero() {
               <span className="text-primary">Made Easy.</span>
             </h1>
 
-            <p className="mt-6 max-w-[480px] text-base leading-7 text-muted-foreground sm:mt-7 sm:leading-8 sm:text-lg">
-              Turn the ideas sitting in your head into something you can
+            <p className="text-center lg:text-start mt-6 max-w-[480px] text-base leading-7 text-muted-foreground sm:mt-7 sm:leading-8 sm:text-lg">
+              Turn your into something you can
               actually wear. Custom merch made around your creativity.
             </p>
 
@@ -125,7 +124,7 @@ export function Hero() {
               </Link>
             </div>
 
-            <div className="mt-8 flex items-center gap-3 sm:mt-9">
+            <div className="hidden lg:flex mt-8 items-center gap-3 sm:mt-9">
               <div className="flex -space-x-2">
                 <div className="flex size-9 items-center justify-center rounded-full border-2 border-background bg-[#E9D7C5] text-xs font-bold text-secondary">
                   I
@@ -159,26 +158,6 @@ export function Hero() {
             <div className="absolute bottom-[10%] left-[8%] size-9 animate-pulse-soft rounded-full bg-primary/10 sm:size-12" />
 
             {/* Decorative handwritten text — hidden on small screens */}
-            <div className="absolute left-[7%] top-[0%] z-20 hidden -rotate-12 sm:block">
-              <p className="font-sans text-sm leading-tight italic sm:text-base">
-                Made from
-                <br />
-                your imagination.
-              </p>
-
-              <svg
-                viewBox="0 0 75 55"
-                fill="none"
-                className="ml-7 mt-1 w-14"
-              >
-                <path
-                  d="M4 3C27 10 44 27 53 48M53 48L40 39M53 48L58 33"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
 
             {/* Main product */}
             <div className="absolute left-[8%] top-[12%] z-10 h-[76%] w-[78%] -rotate-3 overflow-hidden rounded-2xl bg-[#E7E2D8] shadow-[0_25px_70px_rgba(0,0,0,0.14)] transition-transform duration-700 hover:rotate-[1deg] sm:left-[12%] sm:h-[74%] sm:w-[72%] dark:bg-card">
@@ -189,7 +168,7 @@ export function Hero() {
               />
 
               <div className="absolute bottom-3 left-3 rounded-full border border-white/30 bg-secondary/35 px-3 py-1.5 text-[8px] font-bold tracking-[0.12em] text-secondary-foreground backdrop-blur-md sm:bottom-5 sm:left-5 sm:px-4 sm:py-2 sm:text-[10px] sm:tracking-[0.14em]">
-                YOUR DESIGN, YOUR WEAR
+              YOUR DESIGN, YOUR WEAR
               </div>
             </div>
 
