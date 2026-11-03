@@ -1,8 +1,9 @@
 import { ProductCard } from "@/components/products/product-card";
+import { getProducts } from "@/features/products/product.service";
 import { products } from "@/data/products";
 
 export default async function ShopPage() {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  const products = await getProducts();
   return (
     <main className="min-h-screen bg-background">
       {/* Shop banner */}
