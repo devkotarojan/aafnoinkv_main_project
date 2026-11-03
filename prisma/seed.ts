@@ -67,8 +67,18 @@ async function seedData(tx: Prisma.TransactionClient) {
       throw new Error(`User not found for the email ${cartInfo.userEmail}`);
     }
     
+    const variants = Array.from(variantMap.values())
+    
+    if (variants.length === 0) {
+      throw new Error("No products variant available");
+    }
+    
     const validCartItems = cartInfo.cartItems.map((item, index) => {
-      const targetVarient = Array.from(variantMap.values())[index % variantMap.size];
+      const targetVarient = variants[index % variants.length];
+      
+      if (!targetVarient) {
+        throw new Error("Could not find a product variant")
+      }
       
       return {
         variantId: targetVarient.variantId,
