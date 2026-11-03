@@ -12,12 +12,21 @@ interface SocialLink {
   name: string;
 }
 
+//Navigate
+const navigate = [
+  { href: "/", label: "Home" },
+  { href: "/shop", label: "Shop" },
+  { href: "/design-lab", label: "Design your own" },
+  { href: "/inspiration", label: "Inspiration" },
+  { href: "/contact", label: "Contact" },
+];
+
 // Quick links
 const quickLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "FAQ" },
+  { href: "/shop", label: "Shop" },
+  { href: "/design-lab", label: "Design your own" },
+  { href: "/inspiration", label: "Inspiration" },
 ];
 
 // Social links
@@ -31,7 +40,7 @@ export default function Footer() {
   return (
     <footer className="bg-footer-background py-12 text-secondary px-5">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4 px-2 md:px-10">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-5 px-2 md:px-10">
           {/* About */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">About Us</h3>
@@ -42,6 +51,22 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Navigate</h3>
+            <ul className="space-y-2">
+              {navigate.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
@@ -87,7 +112,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="mt-8 border-t border-secondary-foreground/10 pt-8 text-center">
           <p className="text-sm">
-            © {new Date().getFullYear()} SERP. All rights reserved.
+            © {new Date().getFullYear()} AafnoInk. All rights reserved.
           </p>
         </div>
       </div>
