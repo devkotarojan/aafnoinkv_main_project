@@ -44,8 +44,19 @@ async function seedData(tx: Prisma.TransactionClient) {
       data: {
         ...productData,
         variants: {
-          create: variants
-        }
+          create: variants.map((v) => ({
+            size: v.size,
+            sku: v.sku, 
+            stock: v.stock,
+            productColor: {
+              create: {
+                name: v.productColor.name,
+                hexCode: v.productColor.hexCode,
+                images: v.productColor.images,
+              },
+            },
+          })),
+        },
       },
       include: { variants: true }
     });

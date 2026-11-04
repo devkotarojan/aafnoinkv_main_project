@@ -56,13 +56,12 @@ model User {
 
 //---------------------PRODUCT AND VARIANTS------------------------------
 model Product {
-  id          String   @id @default(uuid())
+  id          String  @id @default(uuid())
   title       String
-  slug        String   @unique
-  description String?  @db.Text
-  basePrice   Decimal  @map("base_price") @db.Decimal(10, 2) // Avoiding the floating point error
-  images      String[] // Array of image URLS
-  isPublished Boolean  @default(false) @map("is_published")
+  slug        String  @unique
+  description String? @db.Text
+  basePrice   Decimal @map("base_price") @db.Decimal(10, 2) // Avoiding the floating point error
+  isPublished Boolean @default(false) @map("is_published")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -73,11 +72,22 @@ model Product {
   @@map("products")
 }
 
+model ProductColor {
+  id        String   @id @default(uuid())
+  name      String //BLACK, WHITE
+  hexCode   String   @map("hex_code")
+  images    String[]
+
+  variants ProductVariant[]
+
+  @@map("product_colors")
+}
+
 model ProductVariant {
   id        String @id @default(uuid())
   productId String @map("product_id") //FK
+  colorId   String @map("color_id")
   size      String @default("M") // eg S, M, L, XL
-  color     String @default("BLACK")
   sku       String @unique //Stock Keeping Unit
   stock     Int    @default(0)
 
@@ -85,11 +95,13 @@ model ProductVariant {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  cartItems  CartItem[]
-  orderItems OrderItem[]
-  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productColor   ProductColor @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  cartItems      CartItem[]
+  orderItems     OrderItem[]
+  product        Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productColorId String?
 
-  @@unique([productId, size, color])
+  @@unique([productId, colorId, size])
   @@map("product_variants")
 }
 
@@ -174,7 +186,7 @@ model ShippingAddress {
   fullName    String @map("full_name")
   phone       String
   city        String
-  landmark    String 
+  landmark    String
   description String @db.Text
 
   createdAt DateTime @default(now()) @map("created_at")
