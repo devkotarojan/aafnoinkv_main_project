@@ -16,9 +16,10 @@ export interface ProductCardData {
 }
 
 export function ProductCard({ product }: { product: ProductCardData }) {
+  const formattedPrice = product.basePrice.toLocaleString("en-NP");
   return (
     <Link href={`/products/${product.slug}`} className="group block focus-visible:outline-none">
-      <Card className="h-full pt-0 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+      <Card className="h-full pt-0 pb-1 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <CardContent className="flex h-full flex-col p-0">
           {/* Image — fixed aspect so every card is the same height */}
           <div className="relative aspect-[5/5] w-full overflow-hidden bg-muted">
@@ -33,22 +34,12 @@ export function ProductCard({ product }: { product: ProductCardData }) {
 
           {/* Info */}
           <div className="flex flex-1 flex-col gap-1.5 p-4">
-            <h3 className="line-clamp-1 text-sm font-medium text-foreground">
+            <h3 className="line-clamp-2 text-sm font-medium text-foreground ">
               {product.title}
             </h3>
-            <p className="text-sm text-muted-foreground">color?</p>
 
             <div className="mt-auto flex items-center justify-between pt-2">
-              <p className="text-sm font-semibold text-foreground">{product.basePrice}</p>
-              <div className="flex items-center gap-1">
-                <Star className="size-3.5 fill-primary text-primary" />
-                <span className="text-sm font-medium text-foreground">
-                  rating?
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  22?
-                </span>
-              </div>
+              <p className="text-lg font-medium text-foreground">Rs {formattedPrice}</p>
             </div>
           </div>
         </CardContent>
