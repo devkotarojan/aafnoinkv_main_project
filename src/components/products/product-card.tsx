@@ -9,7 +9,7 @@ import { ProductWithVariants } from "@/features/products/product.service";
 
 export function ProductCard({ product }: { product: ProductWithVariants }) {
   const formattedPrice = product.basePrice.toLocaleString('en-US');
-  
+
   return (
     <Link href={`/product/${product.slug}`} className="group block focus-visible:outline-none">
       <Card className="h-full pt-0 pb-1 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -17,9 +17,10 @@ export function ProductCard({ product }: { product: ProductWithVariants }) {
           {/* Image — fixed aspect so every card is the same height */}
           <div className="relative aspect-[5/5] w-full overflow-hidden bg-muted">
             <Image
-              src={product.colors[0]?.images[0] ?? "/https://picsum.photos/id/870/536/354?grayscale&blur=2"}
+              src={product.colors[0]?.images[0] ?? "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=90"}
               alt={product.title}
               fill
+              loading="eager"
               className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             />
