@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
-import type { Product } from "@/generated/prisma/client";
 
 import { ProductCard } from "@/components/products/product-card";
 import { getRelatedProducts } from "@/features/products/product.service";

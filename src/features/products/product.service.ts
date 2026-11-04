@@ -70,7 +70,11 @@ export async function getRelatedProducts(currentSlug: string, limit=4) {
       },
     }, 
     include: {
-      colors: true,
+      colors: {
+        include: {
+          variants: true,
+        }
+      },
     },
     take: limit,
   });
