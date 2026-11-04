@@ -1,6 +1,5 @@
 import { ProductCard } from "@/components/products/product-card";
 import { getProducts } from "@/features/products/product.service";
-import { products } from "@/data/products";
 
 export default async function ShopPage() {
   const products = await getProducts();

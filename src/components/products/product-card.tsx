@@ -2,23 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Star } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Prisma } from "@/generated/prisma/client";
 
-export interface ProductCardData {
-  id: string;
-  title: string;
-  slug: string;
+
+type ProductWithVariants = Omit<
+  Prisma.ProductGetPayload<{
+    include: {
+      variants: true;
+    };
+  }>,
+  "basePrice"
+> & {
   basePrice: number;
-  images: string[];
-}
+};
 
-export function ProductCard({ product }: { product: ProductCardData }) {
-  const formattedPrice = product.basePrice.toLocaleString("en-NP");
+export function ProductCard({ product }: { product: ProductWithVariants }) {
+  const formattedPrice = product.basePrice.toLocaleString('en-US');
+  
   return (
-    <Link href={`/products/${product.slug}`} className="group block focus-visible:outline-none">
+    <Link href={`/product/${product.slug}`} className="group block focus-visible:outline-none">
       <Card className="h-full pt-0 pb-1 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
         <CardContent className="flex h-full flex-col p-0">
           {/* Image — fixed aspect so every card is the same height */}
