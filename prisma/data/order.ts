@@ -10,7 +10,7 @@ export interface OrderSeedType {
 }
 
 export interface OrderItemSeedType {
-  sku: string; 
+  sku: string;
   quantity: number;
   designUrl?: string;
   title: string;
@@ -43,7 +43,7 @@ export const AllOrderData: OrderSeedType[] = [
     totalAmount: new Prisma.Decimal(2500.00),
     orderItems: [
       {
-        sku: "TS-BLK-M-001",
+        sku: "TS-BLK-M-002",
         quantity: 2,
         designUrl: "https://picsum.photos/536/354",
         title: "Stylish Tshirt for Men",
@@ -74,7 +74,7 @@ export const AllOrderData: OrderSeedType[] = [
     totalAmount: new Prisma.Decimal(2800.00),
     orderItems: [
       {
-        sku: "HD-GRY-M-001",
+        sku: "HD-WHT-M-002",
         quantity: 1,
         designUrl: "https://picsum.photos/id/237/536/354",
         title: "Stylish Hoodie for Men",

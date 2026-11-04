@@ -7,17 +7,16 @@ import { AllUserData } from "./data/user";
 import { AllCartData } from "./data/cart";
 
 interface variantMetaData {
-    variantId: string;
-    title: string;
-    description: string | null;
-    price: Prisma.Decimal;
-    size: string;
-    color: string;
+  variantId: string;
+  title: string;
+  description: string | null;
+  price: Prisma.Decimal;
+  size: string;
 }
 
-async function seedData(tx: Prisma.TransactionClient) { 
+async function seedData(tx: Prisma.TransactionClient) {
   await tx.payment.deleteMany();
-  await tx.shippingAddress.deleteMany(); 
+  await tx.shippingAddress.deleteMany();
   await tx.orderItem.deleteMany();
   await tx.order.deleteMany();
   await tx.cartItem.deleteMany();
@@ -26,78 +25,85 @@ async function seedData(tx: Prisma.TransactionClient) {
   await tx.productVariant.deleteMany();
   await tx.product.deleteMany();
   await tx.user.deleteMany();
-  
+
   console.log("Database wiped successfully!");
-  
+
   const userMap = new Map<string, string>();
   for (const userInfo of AllUserData) {
-    const createdUser = await tx.user.create({data: userInfo});
+    const createdUser = await tx.user.create({ data: userInfo });
     userMap.set(createdUser.email, createdUser.id);
   }
-  
+
   console.log(`seeded ${userMap.size} users`);
-  
+
   const variantMap = new Map<string, variantMetaData>();
   for (const product of AllProductData) {
-    const { variants, ...productData } = product; 
+    const { colors, ...productData } = product;
     const createdProduct = await tx.product.create({
       data: {
         ...productData,
-        variants: {
-          create: variants.map((v) => ({
-            size: v.size,
-            sku: v.sku, 
-            stock: v.stock,
-            productColor: {
-              create: {
-                name: v.productColor.name,
-                hexCode: v.productColor.hexCode,
-                images: v.productColor.images,
-              },
-            },
-          })),
+        colors: {
+          create: colors.map((c) => ({
+            name: c.name,
+            hexCode: c.hexCode,
+            images: c.images,
+            variants: {
+              create: c.variants.map((v) => ({
+                size: v.size,
+                sku: v.sku,
+                stock: v.stock,
+                })),
+              }
+            })),
+          },
         },
+        include: { colors: {
+          include: {
+            variants: true,
+          },
+        }, 
       },
-      include: { variants: true }
     });
-    for (const v of createdProduct.variants) {
-      variantMap.set(v.sku, {
-        variantId: v.id,
-        title: createdProduct.title,
-        description: createdProduct.description,
-        price: createdProduct.basePrice,
-        size: v.size,
-        color: v.color,
-      });
+    
+    for (const color of createdProduct.colors) {
+      for (const variant of color.variants) {
+        variantMap.set(variant.sku, {
+          variantId: variant.id,
+          title: createdProduct.title,
+          description: createdProduct.description,
+          price: createdProduct.basePrice,
+          size: variant.size,
+        });
+      }
     }
   }
-  
+
   for (const cartInfo of AllCartData) {
     const userId = userMap.get(cartInfo.userEmail);
     if (!userId) {
       throw new Error(`User not found for the email ${cartInfo.userEmail}`);
     }
-    
+
     const variants = Array.from(variantMap.values())
-    
+
     if (variants.length === 0) {
       throw new Error("No products variant available");
     }
-    
+
     const validCartItems = cartInfo.cartItems.map((item, index) => {
       const targetVarient = variants[index % variants.length];
-      
+
       if (!targetVarient) {
         throw new Error("Could not find a product variant")
       }
-      
+
       return {
         variantId: targetVarient.variantId,
         quantity: item.quantity,
         designUrl: item.designUrl,
       };
     });
-    
+
     await tx.cart.create({
       data: {
         userId: userId,
@@ -105,14 +111,14 @@ async function seedData(tx: Prisma.TransactionClient) {
       },
     });
   }
-  
+
   for (const orderInfo of AllOrderData) {
     const userId = userMap.get(orderInfo.userEmail);
     if (!userId) {
       throw new Error(`User not found for the email ${orderInfo.userEmail}`);
     }
 
-    const orderItemsCreate:Prisma.OrderItemUncheckedCreateWithoutOrderInput[] = [];
+    const orderItemsCreate: Prisma.OrderItemUncheckedCreateWithoutOrderInput[] = [];
     for (const item of orderInfo.orderItems) {
       const variantInfo = variantMap.get(item.sku);
       if (!variantInfo) {
@@ -131,7 +137,7 @@ async function seedData(tx: Prisma.TransactionClient) {
         sku: item.sku,
       });
     }
-    
+
     if (orderItemsCreate.length === 0) {
       throw new Error(
         `Order for ${orderInfo.userEmail} has no items`
@@ -168,7 +174,7 @@ export async function main() {
         timeout: 60_000,
       }
     )
-    
+
     console.log("Database seeded successfully!");
   } catch (error) {
     console.log("There was an error seeding the data:", error);

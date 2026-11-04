@@ -67,25 +67,27 @@ model Product {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  variants ProductVariant[]
+  colors   ProductColor[]
 
   @@map("products")
 }
 
 model ProductColor {
   id        String   @id @default(uuid())
+  productId String   @map("product_id")
   name      String //BLACK, WHITE
   hexCode   String   @map("hex_code")
   images    String[]
 
   variants ProductVariant[]
+  product  Product          @relation(fields: [productId], references: [id], onDelete: Cascade)
 
+  @@unique([productId, name])
   @@map("product_colors")
 }
 
 model ProductVariant {
   id        String @id @default(uuid())
-  productId String @map("product_id") //FK
   colorId   String @map("color_id")
   size      String @default("M") // eg S, M, L, XL
   sku       String @unique //Stock Keeping Unit
@@ -95,13 +97,11 @@ model ProductVariant {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  productColor   ProductColor @relation(fields: [colorId], references: [id], onDelete: Cascade)
-  cartItems      CartItem[]
-  orderItems     OrderItem[]
-  product        Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productColorId String?
+  productColor ProductColor @relation(fields: [colorId], references: [id], onDelete: Cascade)
+  cartItems    CartItem[]
+  orderItems   OrderItem[]
 
-  @@unique([productId, colorId, size])
+  @@unique([colorId, size])
   @@map("product_variants")
 }
 

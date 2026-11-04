@@ -1,4 +1,20 @@
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma/client";
+
+export type ProductWithVariants = Omit<
+  Prisma.ProductGetPayload<{
+    include: {
+      colors: {
+        include: {
+          variants: true,
+        }
+      };
+    };
+  }>,
+  "basePrice"
+> & {
+  basePrice: number;
+};
 
 export async function getProducts() {
   const products = await prisma.product.findMany({
@@ -6,8 +22,12 @@ export async function getProducts() {
       isPublished: true,
     },
     include: {
-      variants: true,
-    }, 
+      colors: {
+        include: {
+          variants: true,
+        }
+      },
+    },
     orderBy: {
       createdAt: "desc",
     },
@@ -28,7 +48,7 @@ export async function getProduct(slug: string) {
       slug: slug,
     }, 
     include: {
-      variants: true,
+      colors: true,
     }
   });
   
@@ -50,7 +70,7 @@ export async function getRelatedProducts(currentSlug: string, limit=4) {
       },
     }, 
     include: {
-      variants: true,
+      colors: true,
     },
     take: limit,
   });

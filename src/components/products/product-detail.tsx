@@ -20,24 +20,8 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
-import type { Prisma } from "@/generated/prisma/client";
+import { ProductWithVariants } from "@/features/products/product.service";
 
-// Product type including its variants.
-// basePrice is converted from Prisma Decimal to number
-// before passing the product to this Client Component.
-type ProductWithVariants = Omit<
-  Prisma.ProductGetPayload<{
-    include: {
-      variants: true;
-    };
-  }>,
-  "basePrice"
-> & {
-  basePrice: number;
-};
-
-// Map database color names to actual display colors.
-// Add entries here as you introduce more product colors.
 const COLOR_SWATCHES: Record<string, string> = {
   BLACK: "#171717",
   WHITE: "#ffffff",
@@ -83,7 +67,7 @@ export function ProductDetail({
   );
 
   const [selectedImage, setSelectedImage] = useState(
-    product.images[0] ?? ""
+    product.variants[0]?.productColor.images[0] ?? "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg"
   );
 
   // Derive the selected variant from its ID.
@@ -92,22 +76,22 @@ export function ProductDetail({
   );
 
   // Derive available colors from the actual variants.
-  const colors = [...new Set(product.variants.map((variant) => variant.color))];
+  const colors = [...new Set(product.variants.map((variant) => variant.productColor.name))];
 
   // Only show sizes belonging to the selected color.
   const availableSizes = product.variants.filter(
-    (variant) => variant.color === selectedVariant?.color
+    (variant) => variant.productColor.name === selectedVariant?.productColor.name
   );
 
-  const selectedColor = selectedVariant?.color ?? "";
+  const selectedColor = selectedVariant?.productColor.name ?? "";
 
   function handleColorChange(color: string) {
     // Find an available variant for the newly selected color.
     const nextVariant =
       product.variants.find(
-        (variant) => variant.color === color && variant.stock > 0
+        (variant) => variant.productColor.name === color && variant.stock > 0
       ) ??
-      product.variants.find((variant) => variant.color === color);
+      product.variants.find((variant) => variant.productColor.name === color);
 
     if (nextVariant) {
       setSelectedVariantId(nextVariant.id);
@@ -169,7 +153,8 @@ export function ProductDetail({
             </div>
 
             {/* Thumbnails */}
-            {product.images.length > 1 && (
+            {/* 
+            {product.variants.length  >  1 && (
               <div className="grid grid-cols-4 gap-3">
                 {product.images.map((image, index) => (
                   <button
@@ -196,6 +181,7 @@ export function ProductDetail({
                 ))}
               </div>
             )}
+            */}
           </div>
 
           {/* Product information */}

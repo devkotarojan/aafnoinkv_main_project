@@ -4,19 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Prisma } from "@/generated/prisma/client";
+import { ProductWithVariants } from "@/features/products/product.service";
 
-
-type ProductWithVariants = Omit<
-  Prisma.ProductGetPayload<{
-    include: {
-      variants: true;
-    };
-  }>,
-  "basePrice"
-> & {
-  basePrice: number;
-};
 
 export function ProductCard({ product }: { product: ProductWithVariants }) {
   const formattedPrice = product.basePrice.toLocaleString('en-US');
@@ -28,7 +17,7 @@ export function ProductCard({ product }: { product: ProductWithVariants }) {
           {/* Image — fixed aspect so every card is the same height */}
           <div className="relative aspect-[5/5] w-full overflow-hidden bg-muted">
             <Image
-              src={product.images[0] ?? "/https://picsum.photos/id/870/536/354?grayscale&blur=2"}
+              src={product.colors[0]?.images[0] ?? "/https://picsum.photos/id/870/536/354?grayscale&blur=2"}
               alt={product.title}
               fill
               className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
