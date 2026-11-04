@@ -1,17 +1,19 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
+import type { Product } from "@/generated/prisma/client";
 
 import { ProductCard } from "@/components/products/product-card";
-import type { Product } from "@/data/products";
+import { getRelatedProducts } from "@/features/products/product.service";
 
-export function RelatedProducts({
-  products,
+export async function RelatedProducts({
+  productSlug,
   title = "You might also like",
 }: {
-  products: Product[];
+  productSlug: string,
   title?: string;
 }) {
+  const products = await getRelatedProducts(productSlug);
   return (
     <section className="bg-background py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

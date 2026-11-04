@@ -21,3 +21,45 @@ export async function getProducts() {
     };
   })
 }
+
+export async function getProduct(slug: string) {
+  const productInfo = await prisma.product.findUnique({
+    where: {
+      slug: slug,
+    }, 
+    include: {
+      variants: true,
+    }
+  });
+  
+  if (!productInfo) {
+    return null;
+  }
+   
+  return {
+    ...productInfo,
+    basePrice: productInfo.basePrice.toNumber(),
+  };
+}
+
+export async function getRelatedProducts(currentSlug: string, limit=4) {
+  const relatedProducts = await prisma.product.findMany({
+    where: {
+      slug: {
+        not: currentSlug,
+      },
+    }, 
+    include: {
+      variants: true,
+    },
+    take: limit,
+  });
+  
+  return relatedProducts.map((product) => {
+    return (
+      {
+        ...product,
+        basePrice: product.basePrice.toNumber(),
+      });
+  });
+}

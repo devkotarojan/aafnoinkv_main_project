@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import type { Product, ProductImage, ProductColor, ProductSize } from "@/data/products";
+import type { Product } from "@/generated/prisma/client";
 
 const FALLBACK_IMAGE: ProductImage = { src: "", alt: "" };
 const FALLBACK_COLOR: ProductColor = { name: "", class: "", selectedClass: "" };
