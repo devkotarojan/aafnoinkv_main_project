@@ -126,15 +126,12 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
             Back to shop
           </Link>
 
-          <span className="text-muted-foreground">/</span>
-
-          <span className="text-foreground">{product.title}</span>
         </nav>
 
         <div className="grid gap-10 lg:grid-cols-2">
 
           {/* Image gallery */}
-          <div className="grid grid-cols-[80px_1fr] gap-4">
+          <div className="grid lg:grid-cols-[60px_minmax(0,500px)] md:grid-cols-[60px_minmax(0,350px)] grid-cols-[50px_minmax(0,300px)] gap-4">
 
             {/* Vertical thumbnails */}
             {product.colors.length > 0 && (
@@ -191,11 +188,11 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
 
             {/* Title and price */}
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tight">
+              <h1 className="text-xl md:text-3xl font-bold">
                 {product.title}
               </h1>
 
-              <p className="text-2xl font-semibold text-foreground">
+              <p className="text-xl md:text-2xl font-semibold text-foreground">
                 {formatPrice(product.basePrice)}
               </p>
             </div>
