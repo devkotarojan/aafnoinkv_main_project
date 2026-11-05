@@ -22,7 +22,7 @@ export default async function ShopPage() {
       {/* Product grid */}
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 gap-x-5 gap-y-8 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-5 md:gap-5">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

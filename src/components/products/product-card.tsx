@@ -29,12 +29,12 @@ export function ProductCard({ product }: { product: ProductWithVariants }) {
 
           {/* Info */}
           <div className="flex flex-1 flex-col gap-1.5 p-4">
-            <h3 className="line-clamp-2 text-sm font-medium text-foreground ">
+            <h3 className="line-clamp-3 text-sm font-medium text-foreground ">
               {product.title}
             </h3>
 
             <div className="mt-auto flex items-center justify-between pt-2">
-              <p className="text-lg font-medium text-foreground">Rs {formattedPrice}</p>
+              <p className="text-lg font-medium text-foreground">{formattedPrice}</p>
             </div>
           </div>
         </CardContent>
