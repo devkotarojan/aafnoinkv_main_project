@@ -134,28 +134,11 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
         <div className="grid gap-10 lg:grid-cols-2">
 
           {/* Image gallery */}
-          <div className="space-y-4">
-            {/* Main image */}
-            <div className="relative aspect-[9/8] overflow-hidden rounded-2xl bg-muted">
-              {selectedImage ? (
-                <Image
-                  src={selectedImage}
-                  alt={product.title}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
-                  No product image available
-                </div>
-              )}
-            </div>
+          <div className="grid grid-cols-[80px_1fr] gap-4">
 
-            {/* Thumbnails */}
+            {/* Vertical thumbnails */}
             {product.colors.length > 0 && (
-              <div className="grid grid-cols-4 gap-3">
+              <div className="flex flex-col gap-3">
                 {product.colors
                   .flatMap((color) => color.images)
                   .map((image, index) => (
@@ -166,7 +149,7 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
                       aria-label={`View product image ${index + 1}`}
                       aria-pressed={selectedImage === image}
                       className={cn(
-                        "relative aspect-square overflow-hidden rounded-xl transition-all",
+                        "relative aspect-square w-full overflow-hidden rounded-xl transition-all",
                         selectedImage === image
                           ? "ring-2 ring-primary ring-offset-2"
                           : "opacity-70 hover:opacity-100"
@@ -176,14 +159,32 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
                         src={image}
                         alt={`${product.title} image ${index + 1}`}
                         fill
-                        sizes="(max-width: 768px) 25vw, 150px"
+                        sizes="80px"
                         className="object-cover"
                       />
                     </button>
                   ))}
               </div>
             )}
-          </div>
+
+            {/* Main image */}
+            <div className="relative aspect-[7/8] overflow-hidden rounded-2xl bg-muted">
+              {selectedImage ? (
+                <Image
+                  src={selectedImage}
+                  alt={product.title}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 80vw, 40vw"
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center text-sm text-muted-foreground">
+                  No product image available
+                </div>
+              )}
+            </div>
+        </div>
 
           {/* Product information */}
           <div className="space-y-6">
@@ -374,6 +375,9 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
 
             <Separator />
 
+
+          </div>
+        </div>
             {/* Product description */}
             <div className="space-y-3">
               <h3 className="text-sm font-semibold">Description</h3>
@@ -382,9 +386,6 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
                 {product.description || "No description available."}
               </p>
             </div>
-
-          </div>
-        </div>
       </div>
     </div>
   );
