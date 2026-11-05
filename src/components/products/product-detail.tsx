@@ -136,31 +136,43 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
             {/* Vertical thumbnails */}
             {product.colors.length > 0 && (
               <div className="flex flex-col gap-3">
-                {product.colors
-                  .flatMap((color) => color.images)
-                  .map((image, index) => (
-                    <button
-                      key={`${image}-${index}`}
-                      type="button"
-                      onClick={() => setSelectedImage(image)}
-                      aria-label={`View product image ${index + 1}`}
-                      aria-pressed={selectedImage === image}
-                      className={cn(
-                        "relative aspect-square w-full overflow-hidden rounded-xl transition-all",
-                        selectedImage === image
-                          ? "ring-2 ring-primary ring-offset-2"
-                          : "opacity-70 hover:opacity-100"
-                      )}
-                    >
-                      <Image
-                        src={image}
-                        alt={`${product.title} image ${index + 1}`}
-                        fill
-                        sizes="80px"
-                        className="object-cover"
-                      />
-                    </button>
-                  ))}
+                {product.colors.flatMap((color) =>
+                  color.images.map((image, index) => ({
+                    image,
+                    color,
+                    index,
+                  }))
+                ).map(({ image, color, index }) => (
+                  <button
+                    key={`${color.id}-${index}`}
+                    type="button"
+                    onClick={() => {
+                      setSelectedImage(image);
+
+                      const selectedVariant =
+                        color.variants.find((variant) => variant.stock > 0) ??
+                        color.variants[0];
+
+                      setSelectedVariantId(selectedVariant?.id ?? "");
+                    }}
+                    aria-label={`View ${color.name} product image ${index + 1}`}
+                    aria-pressed={selectedImage === image}
+                    className={cn(
+                      "relative aspect-square w-full overflow-hidden rounded-xl transition-all",
+                      selectedImage === image
+                        ? "ring-2 ring-primary ring-offset-2"
+                        : "opacity-70 hover:opacity-100"
+                    )}
+                  >
+                    <Image
+                      src={image}
+                      alt={`${product.title} ${color.name} image ${index + 1}`}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
               </div>
             )}
 
