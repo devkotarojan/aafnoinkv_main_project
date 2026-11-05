@@ -47,20 +47,17 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
       color.variants.some((variant) => variant.stock > 0)
     ) ?? product.colors[0];
 
-  //First variant that in stock from that color
+  //First variant that is in stock from that color
   const initialVariant =
     initialColor?.variants.find((variant) => variant.stock > 0) ??
     initialColor?.variants[0];
 
   const [selectedVariantId, setSelectedVariantId] = useState( initialVariant?.id ?? "");
-
-  const [selectedImage, setSelectedImage] = useState(
-    initialColor?.images[0] ??
-    "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg"
-  );
-
+  const [selectedImage, setSelectedImage] = useState( initialColor?.images[0] ??
+    "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg");
+    
   // Derive the selected color from the selected variant.
-  const selectedColor = product.colors.find((color) =>
+  const selectedColor = product.colors.find((color) => 
     color.variants.some((variant) => variant.id === selectedVariantId)
   );
 
@@ -157,7 +154,6 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
             </div>
 
             {/* Thumbnails */}
-            {/*
             {product.colors.length > 0 && (
               <div className="grid grid-cols-4 gap-3">
                 {product.colors
@@ -187,7 +183,6 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
                   ))}
               </div>
             )}
-            */}
           </div>
 
           {/* Product information */}
