@@ -376,8 +376,6 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
             <Separator />
 
 
-          </div>
-        </div>
             {/* Product description */}
             <div className="space-y-3">
               <h3 className="text-sm font-semibold">Description</h3>
@@ -386,6 +384,8 @@ export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
                 {product.description || "No description available."}
               </p>
             </div>
+          </div>
+        </div>
       </div>
     </div>
   );
