@@ -1,32 +1,19 @@
-
 "use client";
-
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
 import { ProductWithVariants } from "@/features/products/product.service";
+import { formatPrice } from "@/lib/utils";
 
-const priceFormatter = new Intl.NumberFormat("en-NP", {
-  style: "currency",
-  currency: "NPR",
-  maximumFractionDigits: 0,
-});
 
 const COLOR_SWATCHES: Record<string, string> = {
   BLACK: "#171717",
@@ -53,25 +40,19 @@ const sizingChartData = [
 ];
 
 
-export function ProductDetail({
-  product,
-}: {
-  product: ProductWithVariants;
-}) {
-  // Pick the first color that has an available variant.
+export function ProductDetail({ product, }: { product: ProductWithVariants; }) {
+  //First color that has a variant in stock
   const initialColor =
     product.colors.find((color) =>
       color.variants.some((variant) => variant.stock > 0)
     ) ?? product.colors[0];
 
-  // Pick the first available variant from that color.
+  //First variant that in stock from that color
   const initialVariant =
     initialColor?.variants.find((variant) => variant.stock > 0) ??
     initialColor?.variants[0];
 
-  const [selectedVariantId, setSelectedVariantId] = useState(
-    initialVariant?.id ?? ""
-  );
+  const [selectedVariantId, setSelectedVariantId] = useState( initialVariant?.id ?? "");
 
   const [selectedImage, setSelectedImage] = useState(
     initialColor?.images[0] ??
@@ -219,7 +200,7 @@ export function ProductDetail({
               </h1>
 
               <p className="text-2xl font-semibold text-foreground">
-                {priceFormatter.format(product.basePrice)}
+                {formatPrice(product.basePrice)}
               </p>
             </div>
 
