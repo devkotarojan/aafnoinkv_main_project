@@ -57,45 +57,67 @@ export function ProductDetail({
 }: {
   product: ProductWithVariants;
 }) {
-  // Pick the first available variant by default.
+  // Pick the first color that has an available variant.
+  const initialColor =
+    product.colors.find((color) =>
+      color.variants.some((variant) => variant.stock > 0)
+    ) ?? product.colors[0];
+
+  // Pick the first available variant from that color.
   const initialVariant =
-    product.variants.find((variant) => variant.stock > 0) ??
-    product.variants[0];
+    initialColor?.variants.find((variant) => variant.stock > 0) ??
+    initialColor?.variants[0];
 
   const [selectedVariantId, setSelectedVariantId] = useState(
     initialVariant?.id ?? ""
   );
 
   const [selectedImage, setSelectedImage] = useState(
-    product.variants[0]?.productColor.images[0] ?? "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg"
+    initialColor?.images[0] ??
+    "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg"
   );
 
-  // Derive the selected variant from its ID.
-  const selectedVariant = product.variants.find(
+  // Derive the selected color from the selected variant.
+  const selectedColor = product.colors.find((color) =>
+    color.variants.some((variant) => variant.id === selectedVariantId)
+  );
+
+  // Derive the selected variant.
+  const selectedVariant = selectedColor?.variants.find(
     (variant) => variant.id === selectedVariantId
   );
 
-  // Derive available colors from the actual variants.
-  const colors = [...new Set(product.variants.map((variant) => variant.productColor.name))];
+  // Derive available colors from the product's color relations.
+  const colors = product.colors.map((color) => color.name);
 
   // Only show sizes belonging to the selected color.
-  const availableSizes = product.variants.filter(
-    (variant) => variant.productColor.name === selectedVariant?.productColor.name
-  );
+  const availableSizes = selectedColor?.variants ?? [];
 
-  const selectedColor = selectedVariant?.productColor.name ?? "";
+  const selectedColorName = selectedColor?.name ?? "";
 
-  function handleColorChange(color: string) {
+  function handleColorChange(colorName: string) {
+    const nextColor = product.colors.find(
+      (color) => color.name === colorName
+    );
+
+    if (!nextColor) return;
+
     // Find an available variant for the newly selected color.
     const nextVariant =
-      product.variants.find(
-        (variant) => variant.productColor.name === color && variant.stock > 0
-      ) ??
-      product.variants.find((variant) => variant.productColor.name === color);
+      nextColor.variants.find((variant) => variant.stock > 0) ??
+      nextColor.variants[0];
 
     if (nextVariant) {
       setSelectedVariantId(nextVariant.id);
+    } else {
+      setSelectedVariantId("");
     }
+
+    // Update the main image when the color changes.
+    setSelectedImage(
+      nextColor.images[0] ??
+      "https://randomimageurl.com/assets/images/local/sample-2_compressed_q80.jpeg"
+    );
   }
 
   function handleSizeChange(size: string) {
@@ -153,32 +175,34 @@ export function ProductDetail({
             </div>
 
             {/* Thumbnails */}
-            {/* 
-            {product.variants.length  >  1 && (
+            {/*
+            {product.colors.length > 0 && (
               <div className="grid grid-cols-4 gap-3">
-                {product.images.map((image, index) => (
-                  <button
-                    key={`${image}-${index}`}
-                    type="button"
-                    onClick={() => setSelectedImage(image)}
-                    aria-label={`View product image ${index + 1}`}
-                    aria-pressed={selectedImage === image}
-                    className={cn(
-                      "relative aspect-square overflow-hidden rounded-xl transition-all",
-                      selectedImage === image
-                        ? "ring-2 ring-primary ring-offset-2"
-                        : "opacity-70 hover:opacity-100"
-                    )}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${product.title} image ${index + 1}`}
-                      fill
-                      sizes="(max-width: 768px) 25vw, 150px"
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
+                {product.colors
+                  .flatMap((color) => color.images)
+                  .map((image, index) => (
+                    <button
+                      key={`${image}-${index}`}
+                      type="button"
+                      onClick={() => setSelectedImage(image)}
+                      aria-label={`View product image ${index + 1}`}
+                      aria-pressed={selectedImage === image}
+                      className={cn(
+                        "relative aspect-square overflow-hidden rounded-xl transition-all",
+                        selectedImage === image
+                          ? "ring-2 ring-primary ring-offset-2"
+                          : "opacity-70 hover:opacity-100"
+                      )}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${product.title} image ${index + 1}`}
+                        fill
+                        sizes="(max-width: 768px) 25vw, 150px"
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
               </div>
             )}
             */}
@@ -206,12 +230,12 @@ export function ProductDetail({
                 <h3 className="mb-3 text-sm font-medium">
                   Color:{" "}
                   <span className="font-normal text-muted-foreground">
-                    {selectedColor}
+                    {selectedColorName}
                   </span>
                 </h3>
 
                 <RadioGroup
-                  value={selectedColor}
+                  value={selectedColorName}
                   onValueChange={handleColorChange}
                   className="flex flex-wrap gap-3"
                 >
@@ -228,7 +252,7 @@ export function ProductDetail({
                         title={color}
                         className={cn(
                           "flex size-9 cursor-pointer items-center justify-center rounded-full p-1 ring-2 ring-offset-2 transition-all",
-                          selectedColor === color
+                          selectedColorName === color
                             ? "ring-primary"
                             : "ring-transparent hover:ring-muted-foreground/40"
                         )}
@@ -283,14 +307,16 @@ export function ProductDetail({
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="bg-muted">
-                            {["Size", "Chest", "Waist", "Hip"].map((heading) => (
-                              <th
-                                key={heading}
-                                className="px-4 py-2.5 text-left font-medium text-foreground"
-                              >
-                                {heading}
-                              </th>
-                            ))}
+                            {["Size", "Chest", "Waist", "Hip"].map(
+                              (heading) => (
+                                <th
+                                  key={heading}
+                                  className="px-4 py-2.5 text-left font-medium text-foreground"
+                                >
+                                  {heading}
+                                </th>
+                              )
+                            )}
                           </tr>
                         </thead>
 

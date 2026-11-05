@@ -7,9 +7,9 @@ export type ProductWithVariants = Omit<
       colors: {
         include: {
           variants: true,
-        }
-      };
-    };
+        },
+      },
+    },
   }>,
   "basePrice"
 > & {
@@ -25,7 +25,7 @@ export async function getProducts() {
       colors: {
         include: {
           variants: true,
-        }
+        },
       },
     },
     orderBy: {
@@ -48,8 +48,12 @@ export async function getProduct(slug: string) {
       slug: slug,
     }, 
     include: {
-      colors: true,
-    }
+      colors: {
+        include: {
+          variants: true,
+        },
+      },
+    },
   });
   
   if (!productInfo) {
@@ -73,7 +77,7 @@ export async function getRelatedProducts(currentSlug: string, limit=4) {
       colors: {
         include: {
           variants: true,
-        }
+        },
       },
     },
     take: limit,
