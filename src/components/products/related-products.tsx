@@ -19,7 +19,7 @@ export async function RelatedProducts({
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
-        <Button asChild variant="link" className="hidden sm:block group gap-2 text-foreground">
+        <Button asChild variant="link" className="hidden sm:flex group gap-2 text-foreground">
           <Link href="/shop">
             View all
             <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
