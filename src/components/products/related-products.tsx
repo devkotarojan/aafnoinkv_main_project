@@ -15,7 +15,7 @@ export async function RelatedProducts({
   const products = await getRelatedProducts(productSlug);
   
   return (
-    <section className="bg-background py-12 sm:py-16">
+    <section className="bg-background py-12 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-between">
           <h2 className="text-2xl font-bold tracking-tight">{title}</h2>
