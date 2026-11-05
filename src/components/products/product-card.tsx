@@ -6,9 +6,14 @@ import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { ProductWithVariants } from "@/features/products/product.service";
 
+const priceFormatter = new Intl.NumberFormat("en-NP", {
+  style: "currency",
+  currency: "NPR",
+  maximumFractionDigits: 0,
+});
 
 export function ProductCard({ product }: { product: ProductWithVariants }) {
-  const formattedPrice = product.basePrice.toLocaleString('en-US');
+  const formattedPrice = priceFormatter.format(product.basePrice);
 
   return (
     <Link href={`/product/${product.slug}`} className="group block focus-visible:outline-none">

@@ -22,6 +22,12 @@ import { Separator } from "@/components/ui/separator";
 
 import { ProductWithVariants } from "@/features/products/product.service";
 
+const priceFormatter = new Intl.NumberFormat("en-NP", {
+  style: "currency",
+  currency: "NPR",
+  maximumFractionDigits: 0,
+});
+
 const COLOR_SWATCHES: Record<string, string> = {
   BLACK: "#171717",
   WHITE: "#ffffff",
@@ -46,11 +52,6 @@ const sizingChartData = [
   ["XXL", "42–44", "36–38", "44–46"],
 ];
 
-const priceFormatter = new Intl.NumberFormat("en-NP", {
-  style: "currency",
-  currency: "NPR",
-  maximumFractionDigits: 0,
-});
 
 export function ProductDetail({
   product,
