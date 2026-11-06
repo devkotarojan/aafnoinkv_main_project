@@ -13,6 +13,7 @@ datasource db {
 }
 
 //---------------------ENUMS------------------------------
+
 enum Role {
   USER
   ADMIN
@@ -36,12 +37,14 @@ enum PaymentStatus {
 }
 
 //---------------------USER---------------------------------------------
+
 model User {
-  id             String  @id @default(cuid())
-  email          String  @unique
-  fullName       String? @map("full_name")
-  hashedPassword String? @map("hashed_password")
-  role           Role    @default(USER)
+  id            String  @id
+  name          String  @map("full_name")
+  email         String  @unique
+  emailVerified Boolean @default(false) @map("email_verified")
+  image         String?
+  role          Role    @default(USER)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -51,10 +54,14 @@ model User {
   address Address?
   orders  Order[]
 
+  sessions Session[]
+  accounts Account[]
+
   @@map("users")
 }
 
 //---------------------PRODUCT AND VARIANTS------------------------------
+
 model Product {
   id          String  @id @default(uuid())
   title       String
@@ -67,7 +74,7 @@ model Product {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  colors   ProductColor[]
+  colors ProductColor[]
 
   @@map("products")
 }
@@ -87,11 +94,11 @@ model ProductColor {
 }
 
 model ProductVariant {
-  id        String @id @default(uuid())
-  colorId   String @map("color_id")
-  size      String @default("M") // eg S, M, L, XL
-  sku       String @unique //Stock Keeping Unit
-  stock     Int    @default(0)
+  id      String @id @default(uuid())
+  colorId String @map("color_id")
+  size    String @default("M") // eg S, M, L, XL
+  sku     String @unique //Stock Keeping Unit
+  stock   Int    @default(0)
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -106,6 +113,7 @@ model ProductVariant {
 }
 
 //---------------------CART AND CART ITEMS---------------------------------
+
 model Cart {
   id     String @id @default(uuid())
   userId String @unique @map("user_id") //FK
@@ -138,6 +146,7 @@ model CartItem {
 }
 
 //---------------------ORDER AND ORDER ITEM------------------------------
+
 model Order {
   id          String      @id @default(uuid())
   userId      String      @map("user_id")
@@ -180,6 +189,7 @@ model OrderItem {
 }
 
 //Snapshot of the Address when an order is placed
+
 model ShippingAddress {
   id          String @id @default(uuid())
   orderId     String @unique @map("order_id")
@@ -198,6 +208,7 @@ model ShippingAddress {
 }
 
 //------------------------PAYMENT AND ADDRESS------------------------------
+
 model Payment {
   id                    String        @id @default(uuid())
   orderId               String        @map("order_id")
@@ -232,4 +243,52 @@ model Address {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("addresses")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }

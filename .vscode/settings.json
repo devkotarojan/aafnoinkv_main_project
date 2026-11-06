@@ -16,14 +16,12 @@
     "pnpm-lock.yaml": true,
     "pnpm-workspace.yaml": true,
     "skills-lock.json": true,
-    ".env": true,
     ".gitignore": true,
     "README.md": true,
     ".next": true,
     "tsconfig.tsbuildinfo": true,
     "AGENTS.md": true,
     "components.json": true,
-    "package.json": true,
     "prisma7.config.ts": true,
     "tsconfig.json": true
   }
